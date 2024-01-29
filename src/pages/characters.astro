@@ -3,10 +3,12 @@ import "../styles/global.css";
 ---
 
 <head>
+  <meta charset="utf-8" />
   <title>Characters</title>
 </head>
 
 <body>
+  <!-- Nav -->
   <nav>
     <div>
       <a href="/">Star Wars</a>
@@ -18,6 +20,26 @@ import "../styles/global.css";
       <li><a href="/community">Community</a></li>
     </ul>
   </nav>
+  <!-- Partie infos personnage  -->
+  <div class="character">
+    <img src="/images/characters/DeathTrooper.png" alt="photo du personnage" />
+    <div class="infos">
+      <h1 class="infos-titre">Death trooper</h1>
+      <h2 class="infos-surnom">#282680</h2>
+      <hr />
+      <p class="infos-description">
+        Death trooper were an elite variant of the Galactic Empire's
+        stromtroopers who were part of Imperial Intelligence. They served as
+        protective details and bodyguards for special-missions.
+      </p>
+      <div class="infos-tags">
+        <h3>Scarif</h3>
+        <h3>Empire</h3>
+        <h3>DT-l21</h3>
+      </div>
+    </div>
+  </div>
+
   <!-- fond de la page -->
   <svg viewBox="0 0 200 200">
     <rect x="0" y="0" width="200" height="200" fill="#B90E28"></rect>
@@ -25,6 +47,92 @@ import "../styles/global.css";
 </body>
 
 <style scoped>
+  .character {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    /* width: 100vw; */
+
+    gap: 50px;
+
+    img {
+      scale: 0.8;
+
+      transform: translateY(22%);
+    }
+  }
+  .infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* gap: 10px; */
+
+    width: 700px;
+    color: white;
+
+    h1 {
+      font-size: 50px;
+      font-family: var(--font-black);
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+    }
+    h2 {
+      font-size: 40px;
+      font-family: var(--font-nimbus);
+      font-weight: 300;
+      /* text-transform: uppercase; */
+      letter-spacing: 3px;
+      margin-top: -10px;
+    }
+    hr {
+      width: 10%;
+      margin: 0;
+      margin-top: 10px;
+      border: 3px solid black;
+      border-radius: 2px;
+    }
+    p {
+      font-family: Montserrat;
+      text-transform: none;
+
+      /* padding-right: 50px; */
+      width: 60%;
+
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    .infos-tags {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      justify-content: space-between;
+
+      h3 {
+        font-family: var(--font-black);
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: uppercase;
+        background: #171d29;
+        border-radius: 25px;
+        padding: 8px 20px;
+      }
+    }
+  }
+  .infos-tags {
+    /* display: flex;
+    gap: 10px;
+    background: black;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: space-between; */
+  }
+
   html,
   body {
     margin: 0;
