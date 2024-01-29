@@ -1,8 +1,24 @@
+---
+import "../styles/global.css";
+---
+
 <head>
   <title>Characters</title>
 </head>
 
 <body>
+  <nav>
+    <div>
+      <a href="/">Star Wars</a>
+    </div>
+    <ul>
+      <li><a href="/">Story</a></li>
+      <li id="blanco"><a href="/characters">Characters</a></li>
+      <li><a href="/events">Events</a></li>
+      <li><a href="/community">Community</a></li>
+    </ul>
+  </nav>
+  <!-- fond de la page -->
   <svg viewBox="0 0 200 200">
     <rect x="0" y="0" width="200" height="200" fill="#B90E28"></rect>
   </svg>
@@ -27,5 +43,48 @@
     height: 40%;
     transform: rotate(38deg) translate(-0%, -30%);
     z-index: 0;
+  }
+
+  /* Barre de navigation */
+  nav {
+    position: absolute;
+    display: flex;
+    left: 0;
+    right: 0;
+    /* width: 100%; */
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    font-family: var(--primary-font-family);
+    font-size: 18px;
+    z-index: 10;
+  }
+  nav img {
+    height: 40px;
+  }
+  nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-right: 30px;
+    gap: 40px;
+  }
+  nav ul li {
+    margin-left: 20px;
+  }
+  #blanco a {
+    color: white;
+  }
+  nav ul li a,
+  nav div a {
+    color: #505767;
+    text-decoration: none;
+  }
+  nav div a {
+    color: white;
+  }
+  nav ul li a:hover {
+    color: white;
   }
 </style>

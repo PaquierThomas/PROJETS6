@@ -1,0 +1,59 @@
+@import url("https://p.typekit.net/p.css?s=1&k=fgw7kgu&ht=tk&f=14032.14033.14034.14035.21510.26893.26894.26897.26898.26909.26910.26913.26914.26915.29382.29383&a=2419445&app=typekit&e=css");
+
+@font-face {
+  font-family: "Geometos Neue";
+  src: url("/fonts/Fontspring-DEMO-geometos_neue.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geometos Neue";
+  src: url("/fonts/Fontspring-DEMO-geometos_neue_black.otf") format("opentype");
+  font-weight: 900; /* Poids de la police en gras */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geometos Neue";
+  src: url("/fonts/Fontspring-DEMO-geometos_neue_bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geometos Neue";
+  src: url("/fonts/Fontspring-DEMO-geometos_neue_extrabold.otf")
+    format("opentype");
+  font-weight: 800; /* Poids de la police extragrass */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geometos Neue";
+  src: url("/fonts/Fontspring-DEMO-geometos_neue_extralight.otf")
+    format("opentype");
+  font-weight: 200; /* Poids de la police extra-légère */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geometos Neue";
+  src: url("/fonts/Fontspring-DEMO-geometos_neue_light.otf") format("opentype");
+  font-weight: 300; /* Poids de la police légère */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geometos Neue";
+  src: url("/fonts/Fontspring-DEMO-geometos_neue_ultra.otf") format("opentype");
+  font-weight: 100; /* Poids de la police ultra-légère */
+  font-style: normal;
+  font-display: swap;
+}
