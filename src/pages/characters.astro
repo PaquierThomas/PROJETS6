@@ -2,6 +2,81 @@
 import "../styles/global.css";
 ---
 
+<script>
+  function switchCharacter(index) {
+    console.log("Switching to character", index);
+    showCharacter(index);
+  }
+
+  const buttons = document.querySelectorAll(".navigation-buttons button");
+
+  // Ajouter un écouteur d'événement à chaque bouton
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      switchCharacter(index);
+    });
+  });
+
+  let charactersData;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("src/data/characters.json")
+      .then((response) => response.json())
+      .then((data) => {
+        charactersData = data;
+        showCharacter(0); // Par défaut, affiche le premier personnage
+      })
+      .catch((error) => {
+        console.error(
+          "Une erreur s'est produite lors du chargement des données JSON :",
+          error
+        );
+      });
+  });
+
+  function showCharacter(index) {
+    const character = charactersData[index];
+    const characterImage = document.querySelector(".character img");
+    const characterIcon = document.querySelector(".infos img");
+    const characterName = document.querySelector(".infos-titre");
+    const characterNickname = document.querySelector(".infos-surnom");
+    const characterDescription = document.querySelector(".infos-description");
+    const characterTags = document.querySelector(".infos-tags");
+    const body = document.body; // Sélectionne le corps du document
+    const backgroundRect = document.querySelector("svg rect");
+
+    // Mettre à jour le fond en fonction du personnage
+    if (character.tags.includes("ingénieur")) {
+      body.style.backgroundColor = "#171d29"; // Utilisez la couleur actuelle pour Thomas
+      backgroundRect.setAttribute("fill", "#B90E28"); // Couleur actuelle pour Thomas
+    } else if (character.tags.includes("artiste")) {
+      body.style.backgroundColor = "#3B5998"; // Utilisez du bleu pour Chloé
+      backgroundRect.setAttribute("fill", "#133ac9"); // Bleu foncé pour Chloé
+    } else if (character.tags.includes("enseignante")) {
+      body.style.backgroundColor = "#4CAF50"; // Utilisez du vert pour Judith
+      backgroundRect.setAttribute("fill", "#008000"); // Vert foncé pour Judith
+    }
+
+    characterImage.src = character.image;
+    characterIcon.src = character.icone;
+    characterName.textContent = character.nom;
+    characterNickname.textContent = character.surnom;
+    characterDescription.textContent = character.description;
+
+    // Supprime les tags existants
+    characterTags.innerHTML = "";
+
+    // Ajoute les nouveaux tags
+    character.tags.forEach((tag) => {
+      const tagElement = document.createElement("h3");
+      tagElement.textContent = tag;
+      characterTags.appendChild(tagElement);
+    });
+  }
+</script>
+
+<style></style>
+
 <head>
   <meta charset="utf-8" />
   <title>Characters</title>
@@ -9,7 +84,7 @@ import "../styles/global.css";
 
 <body>
   <!-- Nav -->
-  <nav>
+  <!-- <nav>
     <div>
       <a href="/">Star Wars</a>
     </div>
@@ -19,25 +94,26 @@ import "../styles/global.css";
       <li><a href="/events">Events</a></li>
       <li><a href="/community">Community</a></li>
     </ul>
-  </nav>
+  </nav> -->
   <!-- Partie infos personnage  -->
   <div class="character">
-    <img src="/images/characters/DeathTrooper.png" alt="photo du personnage" />
+    <img src="" alt="photo du personnage" />
     <div class="infos">
-      <h1 class="infos-titre">Death trooper</h1>
-      <h2 class="infos-surnom">#282680</h2>
+      <!-- met une icone de personnage -->
+      <img src="" alt="icone du personnage" />
+      <h1 class="infos-titre"></h1>
+      <h2 class="infos-surnom"></h2>
       <hr />
-      <p class="infos-description">
-        Death trooper were an elite variant of the Galactic Empire's
-        stromtroopers who were part of Imperial Intelligence. They served as
-        protective details and bodyguards for special-missions.
-      </p>
-      <div class="infos-tags">
-        <h3>Scarif</h3>
-        <h3>Empire</h3>
-        <h3>DT-l21</h3>
-      </div>
+      <p class="infos-description"></p>
+      <div class="infos-tags"></div>
     </div>
+  </div>
+
+  <!-- Boutons de navigation -->
+  <div class="navigation-buttons">
+    <button onclick="switchCharacter(0)">Personnage 1</button>
+    <button onclick="switchCharacter(1)">Personnage 2</button>
+    <button onclick="switchCharacter(2)">Personnage 3</button>
   </div>
 
   <!-- fond de la page -->
@@ -59,9 +135,10 @@ import "../styles/global.css";
     gap: 50px;
 
     img {
-      scale: 0.8;
+      scale: 1.2;
 
-      transform: translateY(22%);
+      /* transform: translateY(22%), translateX(-10%); */
+      transform: translate(-5%, 10%);
     }
   }
   .infos {
@@ -106,6 +183,13 @@ import "../styles/global.css";
       margin-top: 20px;
       margin-bottom: 30px;
     }
+    img {
+      margin-left: -10px;
+      margin-bottom: 10px;
+      width: 70px;
+      height: 70px;
+      color: white;
+    }
 
     .infos-tags {
       display: flex;
@@ -123,14 +207,6 @@ import "../styles/global.css";
         padding: 8px 20px;
       }
     }
-  }
-  .infos-tags {
-    /* display: flex;
-    gap: 10px;
-    background: black;
-    border-radius: 10px;
-    padding: 10px;
-    justify-content: space-between; */
   }
 
   html,

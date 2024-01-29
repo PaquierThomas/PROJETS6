@@ -1,0 +1,26 @@
+[
+  {
+    "image": "/images/characters/robot.png",
+    "icone": "/icons/robot.svg",
+    "nom": "Thomas",
+    "surnom": "Tom",
+    "description": "Ingénieur passionné par les nouvelles technologies.",
+    "tags": ["ingénieur", "technologie", "passionné"]
+  },
+  {
+    "image": "/images/characters/alien.png",
+    "icone": "/icons/alien.svg",
+    "nom": "Chloé",
+    "surnom": "Chlo",
+    "description": "Artiste talentueuse spécialisée dans la peinture abstraite.",
+    "tags": ["artiste", "peinture", "abstrait"]
+  },
+  {
+    "image": "/images/characters/student.png",
+    "icone": "/icons/human.svg",
+    "nom": "Judith",
+    "surnom": "Judy",
+    "description": "Enseignante dévouée à l'éducation des enfants.",
+    "tags": ["enseignante", "éducation", "enfants"]
+  }
+]
