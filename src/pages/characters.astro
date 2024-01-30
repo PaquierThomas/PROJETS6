@@ -3,6 +3,30 @@ import "../styles/global.css";
 ---
 
 <script>
+  function preloadImages(folderPath, imageNames) {
+    imageNames.forEach(function (imageName) {
+      var img = new Image();
+      img.src = folderPath + "/" + imageName;
+    });
+  }
+  function preloadIcons(iconPath, iconNames) {
+    iconNames.forEach(function (iconName) {
+      var img = new Image();
+      img.src = iconPath + "/" + iconName;
+    });
+  }
+
+  // Usage
+  var folderPath = "/images/characters";
+  var imageNames = ["alien.png", "robot.png", "student.png"];
+
+  preloadImages(folderPath, imageNames);
+
+  var iconPath = "/icons";
+  var iconNames = ["alien.svg", "robot.svg", "human.svg"];
+
+  preloadIcons(iconPath, iconNames);
+
   function switchCharacter(index) {
     console.log("Switching to character", index);
     showCharacter(index);
@@ -47,14 +71,14 @@ import "../styles/global.css";
 
     // Mettre à jour le fond en fonction du personnage
     if (character.tags.includes("ingénieur")) {
-      body.style.backgroundColor = "#171d29"; // Utilisez la couleur actuelle pour Thomas
-      backgroundRect.setAttribute("fill", "#B90E28"); // Couleur actuelle pour Thomas
+      body.style.backgroundColor = "#C0963D"; // Utilisez la couleur actuelle pour Robot
+      backgroundRect.setAttribute("fill", "#6185A5"); // Couleur actuelle pour Robot
     } else if (character.tags.includes("artiste")) {
-      body.style.backgroundColor = "#3B5998"; // Utilisez du bleu pour Chloé
-      backgroundRect.setAttribute("fill", "#133ac9"); // Bleu foncé pour Chloé
+      body.style.backgroundColor = "#1F4155"; // Utilisez du bleu pour Alien
+      backgroundRect.setAttribute("fill", "#1D4D5C"); // Bleu foncé pour Alien
     } else if (character.tags.includes("enseignante")) {
-      body.style.backgroundColor = "#4CAF50"; // Utilisez du vert pour Judith
-      backgroundRect.setAttribute("fill", "#008000"); // Vert foncé pour Judith
+      body.style.backgroundColor = "#4F514A"; // Utilisez du vert pour Humain
+      backgroundRect.setAttribute("fill", "#88A69E"); // Vert foncé pour Humain
     }
 
     characterImage.src = character.image;
@@ -72,6 +96,18 @@ import "../styles/global.css";
       tagElement.textContent = tag;
       characterTags.appendChild(tagElement);
     });
+
+    // Supprimer la classe "selected" de tous les boutons de navigation
+    document
+      .querySelectorAll(".navigation-buttons button")
+      .forEach((button) => {
+        button.classList.remove("selected");
+      });
+
+    // Ajouter la classe "selected" au bouton du personnage actuel
+    document
+      .querySelector(`.navigation-buttons button:nth-child(${index + 1})`)
+      .classList.add("selected");
   }
 </script>
 
@@ -84,7 +120,7 @@ import "../styles/global.css";
 
 <body>
   <!-- Nav -->
-  <!-- <nav>
+  <nav>
     <div>
       <a href="/">Star Wars</a>
     </div>
@@ -94,7 +130,7 @@ import "../styles/global.css";
       <li><a href="/events">Events</a></li>
       <li><a href="/community">Community</a></li>
     </ul>
-  </nav> -->
+  </nav>
   <!-- Partie infos personnage  -->
   <div class="character">
     <img src="" alt="photo du personnage" />
@@ -111,9 +147,9 @@ import "../styles/global.css";
 
   <!-- Boutons de navigation -->
   <div class="navigation-buttons">
-    <button onclick="switchCharacter(0)">Personnage 1</button>
-    <button onclick="switchCharacter(1)">Personnage 2</button>
-    <button onclick="switchCharacter(2)">Personnage 3</button>
+    <button onclick="switchCharacter(0)">IA Robotique</button>
+    <button onclick="switchCharacter(1)">Traqueur</button>
+    <button onclick="switchCharacter(2)">Etudiant</button>
   </div>
 
   <!-- fond de la page -->
@@ -123,6 +159,41 @@ import "../styles/global.css";
 </body>
 
 <style scoped>
+  .selected {
+    color: white !important;
+    font-weight: 900 !important;
+  }
+  .navigation-buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 40%;
+    left: 2%;
+    gap: 20px;
+
+    button {
+      width: 150px;
+      height: 50px;
+      color: rgb(215, 215, 215);
+      font-family: var(--font-black);
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    button:hover {
+      color: white;
+    }
+  }
+  #charac {
+    color: white;
+    font-weight: 900;
+  }
   .character {
     position: absolute;
     top: 50%;
@@ -130,15 +201,18 @@ import "../styles/global.css";
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
-    /* width: 100vw; */
+    width: 100vw;
+    padding-left: 200px;
+    padding-bottom: 50px;
 
     gap: 50px;
 
     img {
-      scale: 1.2;
+      /* scale: 1; */
+      width: 700px;
 
-      /* transform: translateY(22%), translateX(-10%); */
-      transform: translate(-5%, 10%);
+      /* transform: translateY(50%), translateX(-10%); */
+      transform: translate(5%, 5%);
     }
   }
   .infos {
@@ -148,7 +222,7 @@ import "../styles/global.css";
     align-items: flex-start;
     /* gap: 10px; */
 
-    width: 700px;
+    width: calc(100% - 700px);
     color: white;
 
     h1 {
