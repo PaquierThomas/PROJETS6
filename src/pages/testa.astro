@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Story</title>
+  </head>
+  <body>
+    <div class="partie">
+      <p class="partie-texte"></p>
+      <div class="choix"></div>
+    </div>
+
+    <script>
+      function choisirChoix(partieId, choixId) {
+        console.log(
+          `Fetching data for partieId: ${partieId}, choixId: ${choixId}`
+        );
+
+        fetch(`http://localhost:4000/api/histoire/${partieId}/choix/${choixId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Données reçues de l'API :", data);
+
+            document.querySelector(".partie-texte").textContent = data.texte;
+            const choixContainer = document.querySelector(".choix");
+            choixContainer.innerHTML = "";
+
+            if (data.choix && data.choix.length > 0) {
+              console.log("Ajout des choix :", data.choix);
+              data.choix.forEach((choix) => {
+                const bouton = document.createElement("button");
+                bouton.textContent = choix.texte;
+                bouton.addEventListener(
+                  "click",
+                  () => choisirChoix(choix.prochain_partie_id, 0) // Changer 0 pour le choixId approprié si nécessaire
+                );
+                choixContainer.appendChild(bouton);
+              });
+            } else {
+              console.log("Aucun choix disponible.");
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Erreur lors de la récupération de la partie suivante de l'histoire :",
+              error
+            );
+          });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Récupérer le premier texte et choix pour commencer l'histoire
+        choisirChoix(1, 0);
+      });
+    </script>
+  </body>
+</html>

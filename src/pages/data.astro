@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Affichage des données de la base de données</title>
+  </head>
+  <body>
+    <h1>Affichage des données de la base de données</h1>
+
+    <div id="partiesData"></div>
+    <div id="choixData"></div>
+
+    <script>
+      // Fonction pour récupérer et afficher les données de la base de données
+      function afficherDonnees() {
+        // Récupérer les données des parties
+        fetch("http://localhost:4000/api/parties")
+          .then((response) => response.json())
+          .then((data) => {
+            const partiesContainer = document.getElementById("partiesData");
+            partiesContainer.innerHTML = "<h2>Parties:</h2>";
+            data.forEach((partie) => {
+              partiesContainer.innerHTML += `<p>Partie ID: ${partie.partie_id}, Texte: ${partie.texte}</p>`;
+            });
+          })
+          .catch((error) =>
+            console.error(
+              "Erreur lors de la récupération des données de parties:",
+              error
+            )
+          );
+
+        // Récupérer les données des choix
+        fetch("http://localhost:4000/api/choix")
+          .then((response) => response.json())
+          .then((data) => {
+            const choixContainer = document.getElementById("choixData");
+            choixContainer.innerHTML = "<h2>Choix:</h2>";
+            data.forEach((choix) => {
+              choixContainer.innerHTML += `<p>Choix ID: ${choix.choix_id}, Partie ID: ${choix.partie_id}, Texte: ${choix.texte}, Prochaine Partie ID: ${choix.prochain_partie_id}</p>`;
+            });
+          })
+          .catch((error) =>
+            console.error(
+              "Erreur lors de la récupération des données de choix:",
+              error
+            )
+          );
+      }
+
+      // Appeler la fonction pour afficher les données lors du chargement de la page
+      window.onload = afficherDonnees;
+    </script>
+  </body>
+</html>
