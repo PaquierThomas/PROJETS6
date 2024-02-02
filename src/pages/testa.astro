@@ -4,11 +4,87 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive Story</title>
+    <style>
+      body {
+        font-family: "Source Sans Pro", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #262421;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
+
+      .square {
+        width: 350px;
+        height: 350px;
+        border: 2px solid rgba(95, 73, 50, 0.6);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background: #372f26;
+        cursor: pointer;
+      }
+
+      .inner-square {
+        width: 80%;
+        height: 80%;
+        padding: 10%;
+        padding-bottom: 2%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .inner-square img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .text {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 10px;
+        padding-bottom: 5px;
+        gap: 5px;
+        color: rgb(201, 178, 153);
+        font-family: "Source Sans Pro", sans-serif;
+      }
+
+      .text span {
+        font-size: 18px;
+        line-height: 1.1;
+        font-weight: bold;
+        background: #262421;
+        padding: 2px 7px;
+        border: 1px solid rgba(95, 73, 50, 0.6);
+        border-radius: 5px;
+      }
+
+      .text h2 {
+        font-size: 18px;
+        font-weight: normal;
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="partie">
       <p class="partie-texte"></p>
-      <div class="choix"></div>
+      <div class="row">
+        <!-- Les cartes seront ajoutées ici -->
+      </div>
     </div>
 
     <script>
@@ -28,19 +104,78 @@
             console.log("Données reçues de l'API :", data);
 
             document.querySelector(".partie-texte").textContent = data.texte;
-            const choixContainer = document.querySelector(".choix");
+            const choixContainer = document.querySelector(".row");
             choixContainer.innerHTML = "";
 
             if (data.choix && data.choix.length > 0) {
               console.log("Ajout des choix :", data.choix);
-              data.choix.forEach((choix) => {
-                const bouton = document.createElement("button");
-                bouton.textContent = choix.texte;
-                bouton.addEventListener(
-                  "click",
-                  () => choisirChoix(choix.prochain_partie_id, 0) // Changer 0 pour le choixId approprié si nécessaire
+              data.choix.forEach((choix, index) => {
+                const card = document.createElement("div");
+                card.classList.add("square");
+                card.style.border = "2px solid rgba(95, 73, 50, 0.6)";
+                card.style.borderRadius = "5px";
+                card.style.display = "flex";
+                card.style.flexDirection = "column";
+                card.style.justifyContent = "flex-end";
+                card.style.backgroundColor = "#372f26";
+                card.style.width = "350px";
+                card.style.height = "350px";
+
+                const innerSquare = document.createElement("div");
+                innerSquare.classList.add("inner-square");
+                innerSquare.style.width = "80%";
+                innerSquare.style.height = "80%";
+                innerSquare.style.padding = "10%";
+                innerSquare.style.paddingBottom = "2%";
+                innerSquare.style.display = "flex";
+                innerSquare.style.justifyContent = "center";
+                innerSquare.style.alignItems = "center";
+
+                const image = document.createElement("img");
+                image.src = "/images/characters/alien.png";
+                image.alt = "Votre Image";
+                image.style.maxWidth = "100%";
+                image.style.maxHeight = "100%";
+
+                innerSquare.appendChild(image);
+                card.appendChild(innerSquare);
+
+                const textContainer = document.createElement("div");
+                textContainer.classList.add("text");
+                textContainer.style.display = "flex";
+                textContainer.style.alignItems = "center";
+                textContainer.style.justifyContent = "flex-start";
+                textContainer.style.paddingLeft = "10px";
+                textContainer.style.paddingBottom = "5px";
+                textContainer.style.gap = "5px";
+                textContainer.style.color = "rgb(201, 178, 153)";
+                textContainer.style.fontFamily = "Source Sans Pro, sans-serif";
+
+                const span = document.createElement("span");
+                span.textContent = String.fromCharCode(65 + index);
+                span.style.fontSize = "18px";
+                span.style.lineHeight = "1.1";
+                span.style.fontWeight = "bold";
+                span.style.background = "#262421";
+                span.style.padding = "2px 7px";
+                span.style.border = "1px solid rgba(95, 73, 50, 0.6)";
+                span.style.borderRadius = "5px";
+
+                const h2 = document.createElement("h2");
+                h2.textContent = choix.texte;
+                h2.style.fontSize = "18px";
+                h2.style.fontWeight = "normal";
+                h2.style.margin = "0";
+
+                textContainer.appendChild(span);
+                textContainer.appendChild(h2);
+
+                card.appendChild(textContainer);
+                choixContainer.appendChild(card);
+
+                card.addEventListener("click", () =>
+                  choisirChoix(choix.prochain_partie_id, index)
                 );
-                choixContainer.appendChild(bouton);
               });
             } else {
               console.log("Aucun choix disponible.");
