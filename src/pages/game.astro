@@ -13,7 +13,10 @@
       .container {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        padding-left: 5%;
+        padding-top: 7%;
+        overflow: hidden;
         height: 100vh;
         background: #262421;
       }
@@ -21,7 +24,9 @@
       .row {
         display: flex;
         flex-direction: row;
-        gap: 10px;
+        justify-content: flex-start;
+        gap: 20px;
+        margin-top: 2%;
       }
 
       .square {
@@ -77,17 +82,65 @@
         font-weight: normal;
         margin: 0;
       }
+      .partie-texte {
+        color: rgb(201, 178, 153);
+        font-family: var(--font-source);
+        line-height: 32px;
+        font-size: 24px;
+        width: 850px;
+        height: 50px;
+      }
+      .titre {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+      }
+      .index {
+        font-size: 24px;
+
+        color: rgb(201, 178, 153);
+      }
+      .index-fleche {
+        display: flex;
+        align-items: center;
+      }
+      svg {
+        color: rgb(201, 178, 153);
+        stroke-width: 3px;
+      }
     </style>
   </head>
-  <body>
+  <body class="container">
     <div class="partie">
-      <p class="partie-texte"></p>
+      <div class="titre">
+        <div class="index-fleche">
+          <p class="index">1</p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h13M12 5l7 7-7 7"></path>
+          </svg>
+        </div>
+
+        <p class="partie-texte"></p>
+      </div>
       <div class="row">
         <!-- Les cartes seront ajoutées ici -->
       </div>
     </div>
 
     <script>
+      let choixCount = 1; // Variable to store the number of choices made, initialized to 1
+
       function choisirChoix(partieId, choixId) {
         console.log(
           `Fetching data for partieId: ${partieId}, choixId: ${choixId}`
@@ -104,6 +157,7 @@
             console.log("Données reçues de l'API :", data);
 
             document.querySelector(".partie-texte").textContent = data.texte;
+
             const choixContainer = document.querySelector(".row");
             choixContainer.innerHTML = "";
 
@@ -118,8 +172,10 @@
                 card.style.flexDirection = "column";
                 card.style.justifyContent = "flex-end";
                 card.style.backgroundColor = "#372f26";
-                card.style.width = "350px";
-                card.style.height = "350px";
+                card.style.width = "400px";
+                card.style.height = "400px";
+                card.style.cursor = "pointer";
+                card.style.transition = "all 0.3s ease-in-out";
 
                 const innerSquare = document.createElement("div");
                 innerSquare.classList.add("inner-square");
@@ -161,6 +217,25 @@
                 span.style.border = "1px solid rgba(95, 73, 50, 0.6)";
                 span.style.borderRadius = "5px";
 
+                card.addEventListener("mouseenter", function () {
+                  // Apply styles when mouse enters
+                  span.style.color = "#262421";
+                  span.style.background = "rgb(201, 178, 153)";
+                  span.style.border = "2px solid #262421";
+
+                  card.style.border = "2px solid rgb(201, 178, 153)";
+                });
+
+                // Add event listener for mouse leaving the element
+                card.addEventListener("mouseleave", function () {
+                  // Apply styles when mouse leaves
+                  span.style.color = "rgb(201, 178, 153)";
+                  span.style.background = "#262421";
+                  span.style.border = "1px solid rgba(95, 73, 50, 0.6)";
+
+                  card.style.border = "2px solid rgba(95, 73, 50, 0.6)";
+                });
+
                 const h2 = document.createElement("h2");
                 h2.textContent = choix.texte;
                 h2.style.fontSize = "18px";
@@ -173,9 +248,12 @@
                 card.appendChild(textContainer);
                 choixContainer.appendChild(card);
 
-                card.addEventListener("click", () =>
-                  choisirChoix(choix.prochain_partie_id, index)
-                );
+                card.addEventListener("click", () => {
+                  choixCount++; // Increment the number of choices made
+                  document.querySelector(".index").textContent =
+                    `${choixCount}`; // Update the index paragraph
+                  choisirChoix(choix.prochain_partie_id, index);
+                });
               });
             } else {
               console.log("Aucun choix disponible.");
