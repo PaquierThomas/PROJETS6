@@ -1,0 +1,113 @@
+<!-- Connexion.html -->
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion / Inscription</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Connexion</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Nom d'utilisateur:</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Se connecter</button>
+      </form>
+
+      <h2>Inscription</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="registerUsername">Nom d'utilisateur:</label>
+          <input
+            type="text"
+            id="registerUsername"
+            name="registerUsername"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Mot de passe:</label>
+          <input
+            type="password"
+            id="registerPassword"
+            name="registerPassword"
+            required
+          />
+        </div>
+        <button type="submit">S'inscrire</button>
+      </form>
+
+      <p id="message"></p>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          try {
+            const response = await fetch("http://localhost:4000/api/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              // Connexion réussie, rediriger vers la page suivante
+              window.location.href = "/utilisateur";
+            } else {
+              // Afficher le message d'erreur
+              document.getElementById("message").textContent = data.message;
+            }
+          } catch (error) {
+            console.error("Erreur lors de la connexion :", error);
+          }
+        });
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const username = document.getElementById("registerUsername").value;
+          const password = document.getElementById("registerPassword").value;
+
+          try {
+            const response = await fetch("http://localhost:4000/api/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              // Inscription réussie
+              document.getElementById("message").textContent = data.message;
+            } else {
+              // Afficher le message d'erreur
+              document.getElementById("message").textContent = data.message;
+            }
+          } catch (error) {
+            console.error("Erreur lors de l'inscription :", error);
+          }
+        });
+    </script>
+  </body>
+</html>

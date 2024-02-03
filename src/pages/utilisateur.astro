@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Utilisateur</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Informations Utilisateur</h2>
+      <div id="userInfo"></div>
+    </div>
+
+    <script>
+      async function fetchUserInfo() {
+        try {
+          const response = await fetch(
+            "http://localhost:4000/api/verify-login",
+            {
+              method: "GET",
+              credentials: "include", // Inclure les cookies dans la requête
+            }
+          );
+          const data = await response.json();
+
+          if (response.ok) {
+            // Si l'utilisateur est connecté, récupérer ses informations
+            const userInfoResponse = await fetch(
+              "http://localhost:4000/api/user-info",
+              {
+                method: "GET",
+                credentials: "include", // Inclure les cookies dans la requête
+              }
+            );
+            const userInfoData = await userInfoResponse.json();
+
+            if (userInfoResponse.ok) {
+              // Afficher les informations de l'utilisateur
+              const userInfoElement = document.getElementById("userInfo");
+              userInfoElement.innerHTML = `
+                        <p><strong>Nom d'utilisateur:</strong> ${userInfoData.utilisateur.nom_utilisateur}</p>
+                        <p><strong>Identifiant Utilisateur:</strong> ${userInfoData.utilisateur.utilisateur_id}</p>
+                    `;
+            } else {
+              console.error(
+                "Erreur lors de la récupération des informations de l'utilisateur :",
+                userInfoData.message
+              );
+            }
+          } else {
+            console.error(
+              "Erreur lors de la vérification de l'état de connexion :",
+              data.message
+            );
+          }
+        } catch (error) {
+          console.error(
+            "Erreur lors de la récupération des informations de l'utilisateur :",
+            error
+          );
+        }
+      }
+
+      // Appel de la fonction pour récupérer les informations de l'utilisateur
+      fetchUserInfo();
+    </script>
+  </body>
+</html>
