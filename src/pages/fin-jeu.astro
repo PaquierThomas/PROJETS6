@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fin du jeu</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Fin du jeu</h1>
+      <h2 id="end-game-info">
+        <!-- Les informations de fin de jeu seront ajoutées ici -->
+        <span>Résultat:</span>
+      </h2>
+      <button id="restart-button">Réessayer</button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const partieId = localStorage.getItem("choixFinalId"); // Utiliser le nom correct de la clé
+        console.log(partieId);
+
+        fetch(`http://localhost:4000/api/fin-jeu/${partieId}`) // Utiliser partieId au lieu de choixId
+          .then((response) => response.json())
+          .then((data) => {
+            const endGameInfo = document.getElementById("end-game-info");
+
+            endGameInfo.textContent = `${data.partie_texte}`;
+          })
+          .catch((error) =>
+            console.error(
+              "Erreur lors de la récupération des données de fin de jeu :",
+              error
+            )
+          );
+
+        const restartButton = document.getElementById("restart-button");
+        restartButton.addEventListener("click", () => {
+          window.location.href = "/game"; // Rediriger vers la page de jeu pour recommencer
+        });
+      });
+    </script>
+  </body>
+</html>

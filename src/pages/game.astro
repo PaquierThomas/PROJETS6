@@ -93,7 +93,7 @@
       .titre {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         gap: 10px;
       }
       .index {
@@ -188,7 +188,7 @@
                 innerSquare.style.alignItems = "center";
 
                 const image = document.createElement("img");
-                image.src = "/images/characters/alien.png";
+                image.src = `/images/characters/${choix.image_url}`;
                 image.alt = "Votre Image";
                 image.style.maxWidth = "100%";
                 image.style.maxHeight = "100%";
@@ -249,10 +249,24 @@
                 choixContainer.appendChild(card);
 
                 card.addEventListener("click", () => {
-                  choixCount++; // Increment the number of choices made
-                  document.querySelector(".index").textContent =
-                    `${choixCount}`; // Update the index paragraph
-                  choisirChoix(choix.prochain_partie_id, index);
+                  if (choix.fin_jeu === 1) {
+                    // Si le choix mène à la fin du jeu
+                    alert("Le jeu est terminé. Vous êtes mort !");
+                    // Vous pouvez également rediriger l'utilisateur vers une autre page
+                    localStorage.setItem(
+                      "choixFinalId",
+                      choix.prochain_partie_id
+                    );
+                    window.location.href = "/fin-jeu";
+                  } else {
+                    // Si le choix ne mène pas à la fin du jeu
+                    choixCount++; // Increment the number of choices made
+                    document.querySelector(".index").textContent =
+                      `${choixCount}`; // Update the index paragraph
+                    choisirChoix(choix.prochain_partie_id, index);
+                    // localStorage.setItem("choixFinalId", partieId);
+                    console.log("choixFinalId", choix.prochain_partie_id);
+                  }
                 });
               });
             } else {
