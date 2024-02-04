@@ -4,50 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Utilisateur</title>
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
       <h2>Informations Utilisateur</h2>
       <div id="userInfo"></div>
+      <button id="logoutButton">Déconnexion</button>
     </div>
 
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("logoutButton")
+          .addEventListener("click", logout);
+      });
+
+      async function logout() {
+        try {
+          console.log("Tentative de déconnexion...");
+          const response = await fetch("http://localhost:4000/api/logout", {
+            method: "POST",
+            credentials: "include",
+          });
+          console.log("Réponse reçue :", response);
+          const data = await response.json();
+          console.log("Données reçues :", data);
+
+          if (response.ok) {
+            console.log("Déconnexion réussie !");
+            document.cookie =
+              "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "/connexion.html";
+          } else {
+            console.error("Erreur lors de la déconnexion :", data.message);
+          }
+        } catch (error) {
+          console.error("Erreur lors de la déconnexion :", error);
+        }
+      }
+
       async function fetchUserInfo() {
         try {
+          console.log("Récupération des informations de l'utilisateur...");
           const response = await fetch(
             "http://localhost:4000/api/verify-login",
             {
-              method: "GET",
-              credentials: "include", // Inclure les cookies dans la requête
+              credentials: "include",
             }
           );
+          console.log("Réponse reçue :", response);
           const data = await response.json();
+          console.log("Données reçues :", data);
 
           if (response.ok) {
-            // Si l'utilisateur est connecté, récupérer ses informations
-            const userInfoResponse = await fetch(
-              "http://localhost:4000/api/user-info",
-              {
-                method: "GET",
-                credentials: "include", // Inclure les cookies dans la requête
-              }
+            console.log(
+              "Informations utilisateur récupérées avec succès :",
+              data.utilisateur
             );
-            const userInfoData = await userInfoResponse.json();
-
-            if (userInfoResponse.ok) {
-              // Afficher les informations de l'utilisateur
-              const userInfoElement = document.getElementById("userInfo");
-              userInfoElement.innerHTML = `
-                        <p><strong>Nom d'utilisateur:</strong> ${userInfoData.utilisateur.nom_utilisateur}</p>
-                        <p><strong>Identifiant Utilisateur:</strong> ${userInfoData.utilisateur.utilisateur_id}</p>
-                    `;
-            } else {
-              console.error(
-                "Erreur lors de la récupération des informations de l'utilisateur :",
-                userInfoData.message
-              );
-            }
+            const utilisateur = data.utilisateur;
+            const userInfoElement = document.getElementById("userInfo");
+            userInfoElement.innerHTML = `
+              <p><strong>ID:</strong> ${utilisateur.utilisateur_id}</p>
+              <p><strong>Nom d'utilisateur:</strong> ${utilisateur.nom_utilisateur}</p>
+              <p><strong>Mot de passe:</strong> ${utilisateur.mot_de_passe}</p>
+            `;
           } else {
             console.error(
               "Erreur lors de la vérification de l'état de connexion :",
@@ -62,7 +82,6 @@
         }
       }
 
-      // Appel de la fonction pour récupérer les informations de l'utilisateur
       fetchUserInfo();
     </script>
   </body>
