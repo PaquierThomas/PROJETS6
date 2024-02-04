@@ -10,16 +10,16 @@
   {
     "image": "/images/characters/alien.png",
     "icone": "/icons/alien.svg",
-    "nom": "Chloé",
-    "surnom": "Chlo",
+    "nom": "Khon",
+    "surnom": "Le pernicieux",
     "description": "Artiste talentueuse spécialisée dans la peinture abstraite.",
     "tags": ["artiste", "peinture", "abstrait"]
   },
   {
     "image": "/images/characters/student.png",
     "icone": "/icons/human.svg",
-    "nom": "Judith",
-    "surnom": "Judy",
+    "nom": "Dylan Falco",
+    "surnom": "L'altruiste",
     "description": "Enseignante dévouée à l'éducation des enfants.",
     "tags": ["enseignante", "éducation", "enfants"]
   }

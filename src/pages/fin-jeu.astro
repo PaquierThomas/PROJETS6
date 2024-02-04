@@ -13,6 +13,7 @@
         <span>Résultat:</span>
       </h2>
       <button id="restart-button">Réessayer</button>
+      <button id="account-button">Mon Profil</button>
     </div>
 
     <script>
@@ -37,6 +38,10 @@
         const restartButton = document.getElementById("restart-button");
         restartButton.addEventListener("click", () => {
           window.location.href = "/game"; // Rediriger vers la page de jeu pour recommencer
+        });
+        const accountButton = document.getElementById("account-button");
+        accountButton.addEventListener("click", () => {
+          window.location.href = "/utilisateur"; // Rediriger vers la page de l'utilsiateur
         });
       });
     </script>

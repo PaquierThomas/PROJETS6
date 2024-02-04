@@ -46,33 +46,68 @@
       async function fetchUserInfo() {
         try {
           console.log("Récupération des informations de l'utilisateur...");
-          const response = await fetch(
+          const responseUserInfo = await fetch(
             "http://localhost:4000/api/verify-login",
             {
               credentials: "include",
             }
           );
-          console.log("Réponse reçue :", response);
-          const data = await response.json();
-          console.log("Données reçues :", data);
+          console.log("Réponse reçue :", responseUserInfo);
+          const dataUserInfo = await responseUserInfo.json();
+          console.log("Données reçues :", dataUserInfo);
 
-          if (response.ok) {
+          if (responseUserInfo.ok) {
             console.log(
               "Informations utilisateur récupérées avec succès :",
-              data.utilisateur
+              dataUserInfo.utilisateur
             );
-            const utilisateur = data.utilisateur;
+            const utilisateur = dataUserInfo.utilisateur;
             const userInfoElement = document.getElementById("userInfo");
             userInfoElement.innerHTML = `
-              <p><strong>ID:</strong> ${utilisateur.utilisateur_id}</p>
-              <p><strong>Nom d'utilisateur:</strong> ${utilisateur.nom_utilisateur}</p>
-              <p><strong>Mot de passe:</strong> ${utilisateur.mot_de_passe}</p>
-            `;
+        <p><strong>ID:</strong> ${utilisateur.utilisateur_id}</p>
+        <p><strong>Nom d'utilisateur:</strong> ${utilisateur.nom_utilisateur}</p>
+        <p><strong>Mot de passe:</strong> ${utilisateur.mot_de_passe}</p>
+      `;
+
+            // Maintenant, récupérons les parties jouées par l'utilisateur
+            console.log("Récupération des parties jouées par l'utilisateur...");
+            const responseUserParties = await fetch(
+              "http://localhost:4000/api/user-parties",
+              {
+                credentials: "include",
+              }
+            );
+            console.log("Réponse reçue :", responseUserParties);
+            const dataUserParties = await responseUserParties.json();
+            console.log("Données reçues :", dataUserParties);
+
+            if (responseUserParties.ok) {
+              console.log(
+                "Parties jouées par l'utilisateur récupérées avec succès :",
+                dataUserParties.parties
+              );
+              // Afficher les parties jouées par l'utilisateur dans la page utilisateur
+              const userPartiesElement = document.createElement("div");
+              userPartiesElement.innerHTML =
+                "<h3>Parties jouées par l'utilisateur :</h3>";
+              dataUserParties.parties.forEach((partie) => {
+                const partieInfo = document.createElement("p");
+                partieInfo.textContent = `Partie ID: ${partie.partie_id}, Choix: ${partie.choix}`;
+                userPartiesElement.appendChild(partieInfo);
+              });
+              userInfoElement.appendChild(userPartiesElement);
+            } else {
+              console.error(
+                "Erreur lors de la récupération des parties jouées par l'utilisateur :",
+                dataUserParties.message
+              );
+            }
           } else {
             console.error(
               "Erreur lors de la vérification de l'état de connexion :",
-              data.message
+              dataUserInfo.message
             );
+            window.location.href = "/connexion.html";
           }
         } catch (error) {
           console.error(

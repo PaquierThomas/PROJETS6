@@ -140,12 +140,10 @@
 
     <script>
       let choixCount = 1; // Variable to store the number of choices made, initialized to 1
+      let choixPris = []; // Tableau pour stocker les IDs des choix pris
 
       function choisirChoix(partieId, choixId) {
-        console.log(
-          `Fetching data for partieId: ${partieId}, choixId: ${choixId}`
-        );
-
+        // Récupérer les données de l'API
         fetch(`http://localhost:4000/api/histoire/${partieId}/choix/${choixId}`)
           .then((response) => {
             if (!response.ok) {
@@ -164,6 +162,7 @@
             if (data.choix && data.choix.length > 0) {
               console.log("Ajout des choix :", data.choix);
               data.choix.forEach((choix, index) => {
+                console.log("Traitement du choix :", choix);
                 const card = document.createElement("div");
                 card.classList.add("square");
                 card.style.border = "2px solid rgba(95, 73, 50, 0.6)";
@@ -251,6 +250,9 @@
                 card.addEventListener("click", () => {
                   if (choix.fin_jeu === 1) {
                     // Si le choix mène à la fin du jeu
+                    console.log("Le choix mène à la fin du jeu");
+                    choixPris.push(choix.id); // Utiliser choix.id pour obtenir l'identifiant du choix
+                    ajouterPartieAHistorique(partieId, choixPris);
                     alert("Le jeu est terminé. Vous êtes mort !");
                     // Vous pouvez également rediriger l'utilisateur vers une autre page
                     localStorage.setItem(
@@ -260,12 +262,14 @@
                     window.location.href = "/fin-jeu";
                   } else {
                     // Si le choix ne mène pas à la fin du jeu
+                    console.log("Le choix ne mène pas à la fin du jeu");
                     choixCount++; // Increment the number of choices made
                     document.querySelector(".index").textContent =
                       `${choixCount}`; // Update the index paragraph
                     choisirChoix(choix.prochain_partie_id, index);
                     // localStorage.setItem("choixFinalId", partieId);
                     console.log("choixFinalId", choix.prochain_partie_id);
+                    choixPris.push(choix.id); // Utiliser choix.id pour obtenir l'identifiant du choix
                   }
                 });
               });
@@ -285,6 +289,82 @@
         // Récupérer le premier texte et choix pour commencer l'histoire
         choisirChoix(1, 0);
       });
+
+      // Fonction pour vérifier si l'utilisateur est connecté
+      async function checkUserAuthentication() {
+        try {
+          console.log("Vérification de l'authentification de l'utilisateur...");
+          const response = await fetch(
+            "http://localhost:4000/api/verify-login",
+            {
+              credentials: "include",
+            }
+          );
+          console.log("Réponse reçue :", response);
+          const data = await response.json();
+          console.log("Données reçues :", data);
+
+          if (response.ok) {
+            console.log("L'utilisateur est connecté !");
+            // Appeler la fonction pour ajouter la partie à l'historique
+            ajouterPartieAHistorique(partieId);
+          } else {
+            console.error(
+              "L'utilisateur n'est pas authentifié :",
+              data.message
+            );
+            // Rediriger l'utilisateur vers la page de connexion
+            window.location.href = "/connexion.html";
+          }
+        } catch (error) {
+          console.error(
+            "Erreur lors de la vérification de l'authentification :",
+            error
+          );
+        }
+      }
+
+      // Fonction pour ajouter une partie à l'historique
+      async function ajouterPartieAHistorique(partieId, choix) {
+        try {
+          console.log("Tentative d'ajout de la partie à l'historique...");
+          console.log("Choix pris :", choix);
+
+          // Convertir le tableau en chaîne JSON
+          const choixJSON = JSON.stringify(choix);
+
+          const response = await fetch(
+            "http://localhost:4000/api/ajouter-partie-historique",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                partie_id: partieId,
+                choix: choixJSON, // Utiliser la chaîne JSON ici
+              }),
+              credentials: "include",
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              "Erreur lors de l'ajout de la partie à l'historique"
+            );
+          }
+
+          console.log("Partie ajoutée à l'historique avec succès !");
+        } catch (error) {
+          console.error(
+            "Erreur lors de l'ajout de la partie à l'historique :",
+            error
+          );
+        }
+      }
+
+      // Appeler la fonction pour vérifier l'authentification de l'utilisateur avant d'ajouter la partie à l'historique
+      checkUserAuthentication();
     </script>
   </body>
 </html>
