@@ -1,3 +1,16 @@
+---
+type Party = {
+  id: string;
+  partie_text: string;
+  totalChoix: number;
+  choix: { id: string; text: string; total: number }[];
+};
+
+const parties = (await fetch(
+  "http://localhost:4000/api/stats-embranchements"
+).then((res) => res.json())) as Party[];
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,78 +35,31 @@
   </head>
   <body>
     <h1>Statistiques des choix empruntés par les joueurs</h1>
-    <div id="stats-container">
-      <!-- Les statistiques des choix pour chaque embranchement seront affichées ici -->
+    <div>
+      {
+        parties.map((p) => (
+          <div>
+            <h2>
+              {p.partie_text} {p.totalChoix}{" "}
+              <span>{p.totalChoix ? "choix effectués" : "choix effectué"}</span>
+            </h2>
+            {p.totalChoix ? (
+              <ul>
+                {p.choix.map((c) => (
+                  <li>
+                    {c.text}:{" "}
+                    {(c.total / p.totalChoix).toLocaleString("fr", {
+                      style: "percent",
+                    })}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>Cet embranchement n'a jamais été parcouru</p>
+            )}
+          </div>
+        ))
+      }
     </div>
-
-    <script>
-      // Fonction pour récupérer les statistiques des choix pour chaque embranchement depuis le serveur
-      async function getStatsEmbranchements() {
-        try {
-          // Effectuer une requête GET vers l'API pour récupérer les statistiques des choix pour chaque embranchement
-          const response = await fetch(
-            "http://localhost:4000/api/stats-embranchements"
-          );
-
-          // Vérifier si la réponse est OK (200)
-          if (!response.ok) {
-            throw new Error(
-              "Erreur lors de la récupération des statistiques des embranchements."
-            );
-          }
-
-          // Récupérer les données JSON de la réponse
-          const statsEmbranchements = await response.json();
-
-          // Afficher les statistiques des choix pour chaque embranchement
-          displayStatsEmbranchements(statsEmbranchements);
-        } catch (error) {
-          console.error("Erreur :", error.message);
-        }
-      }
-
-      // Fonction pour afficher les statistiques des choix pour chaque embranchement
-      function displayStatsEmbranchements(statsEmbranchements) {
-        // Sélectionner l'élément HTML où afficher les statistiques
-        const statsContainer = document.getElementById("stats-container");
-
-        // Effacer le contenu précédent
-        statsContainer.innerHTML = "";
-
-        // Parcourir les statistiques pour chaque embranchement
-        for (const [partieId, stats] of Object.entries(statsEmbranchements)) {
-          // Créer un élément HTML pour afficher les statistiques de cet embranchement
-          const embranchementStatsElement = document.createElement("div");
-          embranchementStatsElement.classList.add("embranchement-stats");
-
-          // Ajouter le titre de l'embranchement
-          const titreEmbranchement = document.createElement("h3");
-          titreEmbranchement.textContent = `Statistiques pour l'embranchement ${partieId} :`;
-          embranchementStatsElement.appendChild(titreEmbranchement);
-
-          // Ajouter les statistiques des choix pour cet embranchement
-          let totalPourcentage = 0; // Variable pour stocker le total des pourcentages
-          for (const [prochainPartieId, pourcentage] of Object.entries(stats)) {
-            totalPourcentage += parseFloat(pourcentage); // Ajouter le pourcentage au total
-            const choixElement = document.createElement("p");
-            choixElement.textContent = `Choix ${prochainPartieId}: ${pourcentage}%`;
-            embranchementStatsElement.appendChild(choixElement);
-          }
-
-          // Ajouter le total des pourcentages
-          const totalElement = document.createElement("p");
-          totalElement.textContent = `Total des pourcentages : ${totalPourcentage.toFixed(
-            2
-          )}%`;
-          embranchementStatsElement.appendChild(totalElement);
-
-          // Ajouter l'élément des statistiques de cet embranchement au conteneur principal
-          statsContainer.appendChild(embranchementStatsElement);
-        }
-      }
-
-      // Appeler la fonction pour récupérer et afficher les statistiques des choix pour chaque embranchement au chargement de la page
-      document.addEventListener("DOMContentLoaded", getStatsEmbranchements);
-    </script>
   </body>
 </html>

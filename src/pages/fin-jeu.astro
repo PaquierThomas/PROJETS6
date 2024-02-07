@@ -1,3 +1,8 @@
+---
+import alien from "/images/symbols/alien.svg";
+import "../styles/global.css";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,16 +12,77 @@
   </head>
   <body>
     <div class="container">
-      <h1>Fin du jeu</h1>
+      <img src="" alt="SVG" id="random-svg" />
+      <h1 id="end-game-message">Fin du jeu</h1>
       <h2 id="end-game-info">
         <!-- Les informations de fin de jeu seront ajoutées ici -->
         <span>Résultat:</span>
       </h2>
-      <button id="restart-button">Réessayer</button>
-      <button id="account-button">Mon Profil</button>
+
+      <div class="button-flex">
+        <button id="restart-button">Réessayer</button>
+        <button id="account-button">Mon Profil</button>
+      </div>
     </div>
 
     <script>
+      // Array contenant les chemins vers les SVG
+      const svgs = [
+        "/images/symbols/alien.svg",
+        "/images/symbols/goal.svg",
+        "/images/symbols/grave.svg",
+        "/images/symbols/robot.svg",
+        "/images/symbols/ovni.svg",
+        "/images/symbols/hand.svg",
+        "/images/symbols/story/battery.svg",
+        "/images/symbols/story/unknow.svg",
+        "/images/symbols/story/walle.svg",
+        "/images/symbols/story/neutral.svg",
+      ];
+
+      // Fonction pour choisir aléatoirement un SVG
+      function choisirSVGAléatoire() {
+        const index = Math.floor(Math.random() * svgs.length);
+        return svgs[index];
+      }
+
+      // Mettre le SVG aléatoire dans l'image
+      document.getElementById("random-svg").src = choisirSVGAléatoire();
+
+      // Array contenant les propositions
+      const propositions = [
+        "Oups, mieux vaut recommencer.",
+        "C'était un flop total.",
+        "Un échec retentissant.",
+        "Catastrophe totale, désolé!",
+        "Raté de justesse!",
+        "Pas de chance cette fois-ci.",
+        "Fiasco complet, vraiment désolé.",
+        "Un dénouement bien décevant.",
+        "Rideau sur cette débâcle.",
+        "Tout ça pour ça?",
+        "Quel gâchis total!",
+        "Vous avez réussi à atteindre de nouveaux sommets de médiocrité.",
+        "Si l'échec était une œuvre d'art, ce serait vous.",
+        "Je pensais avoir tout vu, puis vous êtes arrivé.",
+        "C'était comme regarder un train dérailler en slow motion.",
+        "Vous avez l'art de tout gâcher, félicitations!",
+        "Même un singe ivre aurait fait mieux.",
+        "Je suis sûr qu'un hamster aurait pris de meilleures décisions.",
+        "Je ne sais pas si je dois rire ou pleurer de votre performance.",
+        "Est-ce que c'était votre stratégie pour impressionner les escargots?",
+      ];
+
+      // Fonction pour choisir aléatoirement une proposition
+      function choisirPropositionAleatoire() {
+        const index = Math.floor(Math.random() * propositions.length);
+        return propositions[index];
+      }
+
+      // Mettre la proposition aléatoire dans le h1
+      document.getElementById("end-game-message").textContent =
+        choisirPropositionAleatoire();
+
       document.addEventListener("DOMContentLoaded", () => {
         const partieId = localStorage.getItem("choixFinalId"); // Utiliser le nom correct de la clé
         console.log(partieId);
@@ -26,7 +92,7 @@
           .then((data) => {
             const endGameInfo = document.getElementById("end-game-info");
 
-            endGameInfo.textContent = `${data.partie_texte}`;
+            endGameInfo.textContent = `"${data.partie_texte}"`;
           })
           .catch((error) =>
             console.error(
@@ -47,3 +113,67 @@
     </script>
   </body>
 </html>
+
+<style scoped>
+  body {
+    background: brown;
+  }
+
+  #random-svg {
+    fill: white;
+    width: 550px;
+    height: 550px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 6%;
+  }
+  .button-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  #end-game-message {
+    color: #faebd7;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: var(--font-sego);
+    margin-top: 1%;
+  }
+
+  #end-game-info {
+    color: rgba(250, 235, 215, 0.8);
+    font-size: 1.7rem;
+    font-family: var(--font-sego);
+    margin-bottom: 1%;
+  }
+
+  button {
+    background-color: transparent;
+    border: 3px solid #faebd7; /* Blanc antique */
+    color: #faebd7; /* Blanc antique */
+    font-weight: bold;
+    font-family: var(--font-sego);
+    border-radius: 5px;
+    padding: 12px 25px; /* Ajustez selon vos besoins */
+    cursor: pointer;
+    outline: none; /* Supprime la bordure de focus */
+    font-size: 1.5em; /* Double la taille du texte */
+  }
+  button:nth-child(1) {
+    background-color: #faebd7;
+    color: brown;
+  }
+
+  /* Style de survol */
+  button:hover {
+    background-color: #faebd7; /* Blanc antique */
+    color: brown; /* Couleur du texte au survol */
+  }
+</style>
