@@ -9,53 +9,240 @@ type Party = {
 const parties = (await fetch(
   "http://localhost:4000/api/stats-embranchements"
 ).then((res) => res.json())) as Party[];
+
+import "../styles/global.css";
 ---
 
-<!doctype html>
+<style>
+  /* Style pour la flexbox */
+  /* Style pour la flexbox */
+  .container {
+    display: flex;
+    flex-direction: column; /* Alignement en colonne */
+    align-items: center; /* Centrage horizontal */
+    position: absolute;
+    top: 150px;
+    left: -500px;
+    gap: 500px; /* Réduire l'espacement entre les images */
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: column; /* Alignement en colonne */
+    align-items: center; /* Centrage horizontal */
+    position: absolute;
+    top: 150px;
+    right: -500px;
+    gap: 500px; /* Réduire l'espacement entre les images */
+  }
+
+  /* Style pour les images */
+
+  body {
+    background: #181930;
+    color: #ffffff;
+    font-family: var(--font-sego);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  /* img {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 0%;
+    right: 45%;
+    color: black;
+    fill: black;
+  } */
+  h1 {
+    font-size: 80px;
+    width: 50vw;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 70px;
+    font-weight: bold;
+    margin-top: 100px;
+  }
+
+  span span {
+    font-weight: bold;
+    color: #ec1c24;
+  }
+
+  p {
+    font-size: 30px;
+    margin-bottom: 20px;
+    width: 50vw;
+    line-height: 1.2;
+    text-align: center;
+  }
+  h2 {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+
+    span {
+      font-weight: 400;
+      margin-left: 5px;
+      color: #ffffff;
+    }
+  }
+
+  ul {
+    list-style: none;
+    font-size: 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25%;
+
+    color: rgba(159, 159, 159, 0.9);
+
+    span {
+      color: #ffffff;
+    }
+  }
+  .isolated {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 25px;
+    color: #ec1c24;
+  }
+  .isolated,
+  ul {
+    padding: calc(65px / 2);
+  }
+  li span {
+    font-weight: bold;
+  }
+
+  /* Styles CSS pour la mise en forme des statistiques */
+  .embranchement-stats {
+    margin-bottom: 20px;
+  }
+
+  .embranchement-stats h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .embranchement-stats p {
+    margin: 5px 0;
+    color: rgb(236, 28, 36);
+  }
+</style>
+
+<script>
+  const svgs = [
+    "/images/symbols/alien.svg",
+    "/images/symbols/grave.svg",
+    "/images/symbols/robot.svg",
+    "/images/symbols/ovni.svg",
+    "/images/symbols/hand.svg",
+    "/images/symbols/story/unknow.svg",
+    "/images/symbols/story/walle.svg",
+  ];
+
+  function choisirSVGAléatoire() {
+    const index = Math.floor(Math.random() * svgs.length);
+    return svgs[index];
+  }
+
+  // Récupérer le conteneur pour les images
+  const container = document.getElementById("random-images-container");
+  const container1 = document.getElementById("random-images-container1");
+
+  // Afficher toutes les images aléatoires dans les deux conteneurs
+  svgs.forEach((svgSrc) => {
+    const svgContainer = document.createElement("div");
+    svgContainer.classList.add("svg-container");
+
+    const svgElement = document.createElement("object");
+    svgElement.type = "image/svg+xml";
+    svgElement.data = svgSrc;
+
+    svgContainer.appendChild(svgElement);
+
+    container.appendChild(svgContainer.cloneNode(true)); // Clone l'image pour le premier conteneur
+    container1.appendChild(svgContainer.cloneNode(true)); // Clone l'image pour le deuxième conteneur
+  });
+
+  // Sélectionner tous les conteneurs SVG
+  const svgContainers = document.querySelectorAll(".svg-container");
+
+  // Parcourir chaque conteneur SVG
+  svgContainers.forEach((container) => {
+    // Sélectionner l'élément object à l'intérieur du conteneur
+    const objectElement = container.querySelector("object");
+
+    // Ajouter un écouteur d'événement pour charger le SVG
+    objectElement.addEventListener("load", function () {
+      // Sélectionner le document à l'intérieur de l'élément object
+      const svgDocument = objectElement.contentDocument;
+
+      // Vérifier si le document est chargé et que l'élément <svg> existe
+      if (svgDocument && svgDocument.querySelector("svg")) {
+        // Sélectionner l'élément <svg> dans le document SVG chargé
+        const svg = svgDocument.querySelector("svg");
+
+        // Définir la taille de l'élément <svg>
+        svg.setAttribute("width", "1100px");
+        svg.setAttribute("height", "1100px");
+
+        svg.setAttribute("fill", "rgba(255, 255, 255, 0.4)");
+      }
+    });
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Statistiques des choix</title>
-    <style>
-      /* Styles CSS pour la mise en forme des statistiques */
-      .embranchement-stats {
-        margin-bottom: 20px;
-      }
-
-      .embranchement-stats h3 {
-        font-size: 20px;
-        margin-bottom: 10px;
-      }
-
-      .embranchement-stats p {
-        margin: 5px 0;
-      }
-    </style>
   </head>
   <body>
+    <div class="container" id="random-images-container">
+      <!-- Les images seront ajoutées ici par JavaScript -->
+    </div>
+    <div class="container2" id="random-images-container1">
+      <!-- Les images seront ajoutées ici par JavaScript -->
+    </div>
     <h1>Statistiques des choix empruntés par les joueurs</h1>
     <div>
       {
         parties.map((p) => (
           <div>
             <h2>
-              {p.partie_text} {p.totalChoix}{" "}
-              <span>{p.totalChoix ? "choix effectués" : "choix effectué"}</span>
+              {p.partie_text}
+              <span>
+                <span>{p.totalChoix}</span>{" "}
+                {p.totalChoix ? "choix effectués" : "choix effectué"}
+              </span>
             </h2>
             {p.totalChoix ? (
               <ul>
                 {p.choix.map((c) => (
                   <li>
                     {c.text}:{" "}
-                    {(c.total / p.totalChoix).toLocaleString("fr", {
-                      style: "percent",
-                    })}
+                    <span>
+                      {(c.total / p.totalChoix).toLocaleString("fr", {
+                        style: "percent",
+                      })}
+                    </span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p>Cet embranchement n'a jamais été parcouru</p>
+              <p class="isolated">Cet embranchement n'a jamais été parcouru</p>
             )}
           </div>
         ))

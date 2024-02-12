@@ -1,9 +1,9 @@
 [
   {
-    "image": "/images/characters/robot.png",
-    "icone": "/icons/robot.svg",
+    "image": "/images/characters/student.png",
+    "icone": "/icons/human.svg",
     "nom": "Thomas",
-    "surnom": "Tom",
+    "surnom": "L'altruiste",
     "description": "Ingénieur passionné par les nouvelles technologies.",
     "tags": ["ingénieur", "technologie", "passionné"]
   },
@@ -16,8 +16,8 @@
     "tags": ["artiste", "peinture", "abstrait"]
   },
   {
-    "image": "/images/characters/student.png",
-    "icone": "/icons/human.svg",
+    "image": "/images/characters/robot.png",
+    "icone": "/icons/robot.svg",
     "nom": "Dylan Falco",
     "surnom": "L'altruiste",
     "description": "Enseignante dévouée à l'éducation des enfants.",

@@ -71,14 +71,14 @@ import "../styles/global.css";
 
     // Mettre à jour le fond en fonction du personnage
     if (character.tags.includes("ingénieur")) {
-      body.style.backgroundColor = "#C0963D"; // Utilisez la couleur actuelle pour Robot
-      backgroundRect.setAttribute("fill", "#6185A5"); // Couleur actuelle pour Robot
+      body.style.backgroundColor = "#181930"; // Utilisez la couleur actuelle pour Robot
+      backgroundRect.setAttribute("fill", "rgba(236, 28, 36,.8)"); // Couleur actuelle pour Robot
     } else if (character.tags.includes("artiste")) {
       body.style.backgroundColor = "#1F4155"; // Utilisez du bleu pour Alien
       backgroundRect.setAttribute("fill", "#1D4D5C"); // Bleu foncé pour Alien
     } else if (character.tags.includes("enseignante")) {
-      body.style.backgroundColor = "#4F514A"; // Utilisez du vert pour Humain
-      backgroundRect.setAttribute("fill", "#88A69E"); // Vert foncé pour Humain
+      body.style.backgroundColor = " #C0963D"; // Utilisez du vert pour Humain
+      backgroundRect.setAttribute("fill", "#6185A5 "); // Vert foncé pour Humain
     }
 
     characterImage.src = character.image;
@@ -125,7 +125,7 @@ import "../styles/global.css";
     <ul>
       <li><a href="/story">Story</a></li>
       <li id="blanco"><a href="/characters">Characters</a></li>
-      <li><a href="/test">Events</a></li>
+      <li><a href="/statistiques">Statistiques</a></li>
       <li><a href="/community">Community</a></li>
     </ul>
   </nav>
@@ -145,9 +145,9 @@ import "../styles/global.css";
 
   <!-- Boutons de navigation -->
   <div class="navigation-buttons">
-    <button onclick="switchCharacter(0)">IA Robotique</button>
+    <button onclick="switchCharacter(0)">Etudiant</button>
     <button onclick="switchCharacter(1)">Traqueur</button>
-    <button onclick="switchCharacter(2)">Etudiant</button>
+    <button onclick="switchCharacter(2)">IA Robotique</button>
   </div>
 
   <!-- fond de la page -->
