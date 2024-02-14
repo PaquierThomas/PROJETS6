@@ -1,16 +1,18 @@
 ---
-import '../styles/global.css'
+import "../styles/global.css";
 ---
+
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Connexion / Inscription</title>
-    
   </head>
 
   <style scoped>
+    /* Importation de la police Bebas Neue */
+    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
     .form {
       display: flex;
       gap: 10px;
@@ -23,16 +25,25 @@ import '../styles/global.css'
       padding: 0.5rem 1rem;
       font-size: 1.5rem;
       font-weight: 400;
+
+      font-family: "Bebas Neue", sans-serif;
       border-radius: 0.35rem;
       color: black;
       background-color: white;
       background-clip: padding-box;
       border-width: 2px;
       border-style: solid;
-      border-color: black;
+      border-color: #b53926;
+
       transition: all 0.3s ease-in-out;
       margin: 0;
       /* font-family: $primary-font-family; */
+    }
+    .custom-input:focus,
+    .custom-input:hover {
+      outline: none;
+      border-color: #a23322;
+      border: 2px solid #a23322;
     }
 
     .submit-btn {
@@ -64,179 +75,190 @@ import '../styles/global.css'
         0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
-
-
-
     .full-height {
-  height: 100vh;
-}
+      height: 100vh;
+    }
 
-/* Styles pour le conteneur personnalisé */
-.custom-container {
-  padding: 3rem;
-  height: 100%;
-}
+    /* Styles pour le conteneur personnalisé */
+    .custom-container {
+      padding: 3rem;
+      height: 100%;
+    }
 
-/* Styles pour le conteneur flex */
-.flex-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  color: black;
-  width: 92%;
-  height: 94%;
-  border-width: 4px;
-  border-style: solid;
-  border-color: #f59e0b;
-  border-radius: 1rem;
-}
+    /* Styles pour le conteneur flex */
+    .flex-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      color: black;
+      width: 92%;
+      height: 94%;
+      border-width: 4px;
+      border-style: solid;
+      border-color: #848489;
+      border-radius: 1rem;
+    }
 
-/* Styles pour le contenu de gauche */
-.left-content {
-  width: 30%;
-  // margin-left: 10%;
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-}
+    /* Styles pour le contenu de gauche */
+    .left-content {
+      width: 30%;
+      /* margin-left: 10%; */
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
 
-.form {
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-}
+    .form {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
 
-/* Styles pour les images */
-.ml-img {
-  margin-left: -40px;
-  margin-bottom: 20px;
-}
+    /* Styles pour les images */
+    .ml-img {
+      margin-left: -40px;
+      margin-bottom: 20px;
+    }
 
-/* Styles pour les titres */
-.title {
-  font-weight: 600;
-  font-size: 2.5rem;
-  font-family: var(--font-sego)
-}
+    /* Styles pour les titres */
+    .title {
+      font-weight: 600;
+      font-size: 2.5rem;
+      font-family: var(--font-sego);
+      color: white;
+    }
 
-/* Styles pour le texte */
-.medium-text {
-  font-weight: 500;
-  font-size: 1.5rem;
-  font-family: var(--font-sego)
-}
+    /* Styles pour le texte */
+    .medium-text {
+      font-weight: 500;
+      font-size: 1.5rem;
+      font-family: var(--font-sego);
+    }
 
-/* Styles pour le diviseur */
-.flex-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  margin: 8px 0;
-  font-family: var(--font-sego)
-}
+    /* Styles pour le diviseur */
+    .flex-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      margin: 8px 0;
+      font-family: var(--font-sego);
+    }
 
-/* Styles pour le texte centré */
-.centered-text {
-  font-weight: 600;
-  text-align: center;
-}
+    /* Styles pour le texte centré */
+    .centered-text {
+      font-weight: 600;
+      text-align: center;
+      color: white;
+    }
 
-.options {
-  display: flex;
-  justify-content: space-between;
-  margin: 1.5rem 0;
-}
+    .options {
+      display: flex;
+      justify-content: space-between;
+      margin: 1.5rem 0;
+    }
 
-/* Styles pour le label du formulaire */
-.check-label {
-  font-weight: 700;
-  color: #4b5563;
-  display: inline-block;
-  margin-bottom: 0;
-  font-family: var(--font-sego)
-}
+    /* Styles pour le label du formulaire */
+    .check-label {
+      font-weight: 700;
+      color: #7d7873;
+      display: inline-block;
+      margin-bottom: 0;
+      font-family: var(--font-sego);
+    }
 
-/* Styles pour le bouton de soumission */
-.submit-btn {
-  display: inline-block;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
-  border-radius: 0.25rem;
-  width: 100%;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  line-height: 1.375;
-  font-family: var(--font-sego);
+    /* Styles pour le bouton de soumission */
+    .submit-btn {
+      display: inline-block;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      padding-left: 1.75rem;
+      padding-right: 1.75rem;
+      border-radius: 0.25rem;
+      width: 100%;
+      font-size: 1.45rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+      line-height: 1.375;
+      font-family: "Bebas Neue", sans-serif;
 
-  border: #000000;
-  color: #ffffff;
-  text-transform: uppercase;
-  background-color: #000000;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+      border: #b53926;
+      color: #ffffff;
+      text-transform: uppercase;
+      background-color: #b53926;
+      transition-property: background-color, border-color, color, fill, stroke,
+        opacity, box-shadow, transform;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+      transition-duration: 150ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
 
-/* Styles pour l'image */
-.right-content {
-  width: 41%;
-   /* margin-top: 1px; */
-  margin-left: 13.48rem;
-  z-index: -2;
-}
+    /* Styles pour l'image */
+    .right-content {
+      width: 41%;
+      /* margin-top: 1px; */
+      margin-left: 13.48rem;
+      z-index: -2;
+    }
 
-/* Styles pour les inputs */
-.custom-input {
-  display: block;
-  width: 95%;
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  font-weight: 400;
-  border-radius: 0.35rem;
-  color: black;
-  background-color: white;
-  background-clip: padding-box;
-  border-width: 2px;
-  border-style: solid;
-  border-color: black;
-  transition: all 0.3s ease-in-out;
-  margin: 0;
-  font-family: var(--font-sego)
-}
+    /* Styles pour les inputs */
+    .custom-input {
+      display: block;
+      width: 95%;
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+      font-weight: 400;
+      border-radius: 0.35rem;
+      color: rgba(255, 255, 255, 0.7);
+      background-color: #4c4946;
+      background-clip: padding-box;
+      border-width: 2px;
+      border-style: solid;
+      border-color: #4c4946;
+      transition: all 0.3s ease-in-out;
+      margin: 0;
+      font-family: var(--font-sego);
+    }
 
-/* Styles pour la case à cocher */
-.custom-checkbox {
-  width: 20px;
-  height: 20px;
-  margin-right: 0.5rem;
-}
+    /* Styles pour la case à cocher */
+    .custom-checkbox {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+    }
 
-/* Styles pour le lien "Mot de passe oublié?" */
-.forgot-password {
-  color: black;
-  transition: color 0.3s ease-in-out;
-  font-family: var(--font-sego)
-}
+    /* Styles pour le lien "Mot de passe oublié?" */
+    .forgot-password {
+      color: #7d7873;
+      transition: color 0.3s ease-in-out;
+      font-family: var(--font-sego);
+    }
 
-/* Styles pour les effets de survol des boutons */
-.submit-btn:hover {
-  background-color: #f59e0b;
-  color: white;
-}
-.forgot-password:hover {
-  color: #f59e0b;
-}
+    /* Styles pour les effets de survol des boutons */
+    .submit-btn:hover {
+      background: #a23322;
+      color: white;
+    }
+    .forgot-password:hover {
+      color: #a23322;
+    }
+
+    body {
+      background: #141312;
+      background-image: url("/images/noise.webp");
+    }
+    #exampleCheck3 {
+      accent-color: #a23322;
+    }
+
+    #message {
+      color: white;
+    }
   </style>
 
   <body
@@ -323,7 +345,7 @@ import '../styles/global.css'
             <!-- Image -->
             <div class="right-content">
               <img
-                src="/images/montre_connexion.webp"
+                src="/images/connexion.webp"
                 class="full-width"
                 alt="image montre connecte connexion"
               />
@@ -332,66 +354,71 @@ import '../styles/global.css'
         </div>
       </section>
     </div>
-  <!-- Déplacez votre script JavaScript vers la fin du document -->
+    <!-- Déplacez votre script JavaScript vers la fin du document -->
     <script>
-      document.getElementById("loginForm").addEventListener("submit", async (event) => {
-        event.preventDefault();
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
 
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
 
-        try {
-          const response = await fetch("http://localhost:4000/api/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password }),
-            credentials: "include", // Inclure les cookies dans la requête
-          });
+          try {
+            const response = await fetch("http://localhost:4000/api/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username, password }),
+              credentials: "include", // Inclure les cookies dans la requête
+            });
 
-          const data = await response.json();
+            const data = await response.json();
 
-          if (response.ok) {
-            // Connexion réussie, rediriger vers la page suivante
-            window.location.href = "/utilisateur";
-          } else {
-            // Afficher le message d'erreur
-            document.getElementById("message").textContent = data.message;
+            if (response.ok) {
+              // Connexion réussie, rediriger vers la page précédente ou vers une page par défaut
+              const previousPage = document.referrer || "/"; // Utiliser la page précédente ou "/" par défaut
+              window.location.href = previousPage;
+            } else {
+              // Afficher le message d'erreur
+              document.getElementById("message").textContent = data.message;
+            }
+          } catch (error) {
+            console.error("Erreur lors de la connexion :", error);
           }
-        } catch (error) {
-          console.error("Erreur lors de la connexion :", error);
-        }
-      });
+        });
 
-      document.getElementById("registerForm").addEventListener("submit", async (event) => {
-        event.preventDefault();
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
 
-        const username = document.getElementById("registerUsername").value;
-        const password = document.getElementById("registerPassword").value;
+          const username = document.getElementById("registerUsername").value;
+          const password = document.getElementById("registerPassword").value;
 
-        try {
-          const response = await fetch("http://localhost:4000/api/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password }),
-          });
+          try {
+            const response = await fetch("http://localhost:4000/api/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username, password }),
+            });
 
-          const data = await response.json();
+            const data = await response.json();
 
-          if (response.ok) {
-            // Inscription réussie
-            document.getElementById("message").textContent = data.message;
-          } else {
-            // Afficher le message d'erreur
-            document.getElementById("message").textContent = data.message;
+            if (response.ok) {
+              // Inscription réussie
+              document.getElementById("message").textContent = data.message;
+            } else {
+              // Afficher le message d'erreur
+              document.getElementById("message").textContent = data.message;
+            }
+          } catch (error) {
+            console.error("Erreur lors de l'inscription :", error);
           }
-        } catch (error) {
-          console.error("Erreur lors de l'inscription :", error);
-        }
-      });
+        });
     </script>
   </body>
 </html>

@@ -1,123 +1,398 @@
-<!doctype html>
+---
+type Party = {
+  mdp: string;
+  nom_utilisateur: string;
+};
+
+const parties = (await fetch("http://localhost:4000/api/verify-login").then(
+  (res) => res.json()
+)) as Party;
+
+console.log(parties);
+---
+
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Utilisateur</title>
+    <title>Mon Compte</title>
   </head>
+  <nav>
+    <div>
+      <a href="/">An Enshrouded Encounter</a>
+    </div>
+    <ul>
+      <li><a href="/story">Histoire</a></li>
+      <li><a href="/characters">Personnages</a></li>
+      <li><a href="/statistiques">Statistiques</a></li>
+      <li id="blanco"><a href="#">Profil</a><hr /></li>
+    </ul>
+  </nav>
   <body>
     <div class="container">
-      <h2>Informations Utilisateur</h2>
-      <div id="userInfo"></div>
-      <button id="logoutButton">Déconnexion</button>
+      <main>
+        <h2 class="title">Informations Utilisateur</h2>
+        <div id="userInfo">
+          <div class="row">
+            <h2>Nom d'utilisateur:</h2>
+            <h2 id="username"></h2>
+          </div>
+          <div class="row">
+            <h2>Mot de passe:</h2>
+            <h2 id="password"></h2>
+          </div>
+          <div>
+            <h2 class="title-parties">Historique des parties</h2>
+            <div id="userParties">
+              <div>
+                <h4>Partie N°:</h4>
+                <h4 id="IDHistorique"></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        document
-          .getElementById("logoutButton")
-          .addEventListener("click", logout);
-      });
+    <button id="logoutButton"><a href="/">Déconnexion</a></button>
+  </body>
 
-      async function logout() {
-        try {
-          console.log("Tentative de déconnexion...");
-          const response = await fetch("http://localhost:4000/api/logout", {
-            method: "POST",
-            credentials: "include",
-          });
-          console.log("Réponse reçue :", response);
-          const data = await response.json();
-          console.log("Données reçues :", data);
+  <style scoped>
+    nav {
+      position: absolute;
+      display: flex;
+      left: 0;
+      right: 0;
+      /* top: -120px; */
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 40px;
+      z-index: 10;
+      color: #ffffff;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 25px;
+    }
 
-          if (response.ok) {
-            console.log("Déconnexion réussie !");
-            document.cookie =
-              "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            window.location.href = "/connexion.html";
-          } else {
-            console.error("Erreur lors de la déconnexion :", data.message);
-          }
-        } catch (error) {
-          console.error("Erreur lors de la déconnexion :", error);
-        }
+    nav img {
+      height: 40px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      padding-right: 30px;
+      gap: 40px;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a,
+    nav div a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+    }
+
+    nav div a {
+      color: white;
+    }
+
+    nav ul li a:hover {
+      color: white;
+    }
+    .isolated {
+      color: rgba(255, 255, 255, 0.85) !important;
+      background-color: #b53926;
+      padding: 7px 14px;
+      transition: all 0.2s ease-in-out;
+    }
+    .isolated:hover {
+      color: white !important;
+      cursor: pointer;
+      background: #a23322;
+    }
+    #blanco hr {
+      border: 0;
+      height: 3px;
+      background-color: #cd412b;
+      margin-top: -2px;
+      margin-bottom: 10px;
+      color: white;
+    }
+    #blanco a {
+      color: white;
+    }
+
+    .profil {
+      background: #1b1b1b;
+      color: rgba(255, 255, 255, 0.7);
+      border: #4c4946 2px solid;
+      padding: 0 10px;
+      /* padding-bottom: -10px; */
+      height: 40px;
+    }
+    .profil:hover {
+      color: white;
+      background: #4c4946;
+    }
+    a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.85);
+      transition: all 0.2s ease-in-out;
+    }
+    a:nth-child(2) {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+    .title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .title-parties {
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+      font-size: 3em;
+      border-bottom: 1px solid #ffffff;
+      margin-bottom: 0;
+    }
+    body {
+      background: #181930;
+      color: #ffffff;
+      font-family: var(--font-sego);
+      background-image: url("/images/noise.webp");
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    main {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      font-family: "Bebas Neue", sans-serif;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      width: 200px;
+      margin: 0;
+    }
+    #userinfo {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 70vw;
+      margin: 0 auto;
+      margin-top: 5%;
+      position: relative;
+    }
+
+    #logoutButton {
+      background: #b53926;
+      color: rgba(255, 255, 255, 0.85) !important;
+      transition: all 0.2s ease-in-out;
+      border: none;
+
+      padding: 30px 20px;
+      padding-bottom: 25px;
+      cursor: pointer;
+      height: 40px;
+      background-image: url("/images/noise.webp");
+      display: flex;
+      align-self: flex-start;
+      align-items: center;
+      justify-content: center;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 2em;
+
+      position: fixed;
+      bottom: 20px; /* Ajustez cette valeur selon vos besoins */
+      right: 20px; /* Ajustez cette valeur selon vos besoins */
+    }
+    #logoutButton:hover {
+      background: #a23322;
+      a {
+        color: white;
       }
+    }
+  </style>
 
-      async function fetchUserInfo() {
-        try {
-          console.log("Récupération des informations de l'utilisateur...");
-          const responseUserInfo = await fetch(
-            "http://localhost:4000/api/verify-login",
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("logoutButton").addEventListener("click", logout);
+    });
+
+    async function logout() {
+      try {
+        console.log("Tentative de déconnexion...");
+        const response = await fetch("http://localhost:4000/api/logout", {
+          method: "POST",
+          credentials: "include",
+        });
+        console.log("Réponse reçue :", response);
+        const data = await response.json();
+        console.log("Données reçues :", data);
+
+        if (response.ok) {
+          console.log("Déconnexion réussie !");
+          document.cookie =
+            "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          const previousPage = document.referrer || "/"; // Utiliser la page précédente ou "/" par défaut
+          window.location.href = previousPage;
+        } else {
+          console.error("Erreur lors de la déconnexion :", data.message);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la déconnexion :", error);
+      }
+    }
+
+    async function fetchUserInfo() {
+      try {
+        // Récupération des informations de l'utilisateur
+        const responseUserInfo = await fetch(
+          "http://localhost:4000/api/verify-login",
+          {
+            credentials: "include",
+          }
+        );
+        const dataUserInfo = await responseUserInfo.json();
+
+        if (responseUserInfo.ok) {
+          const utilisateur = dataUserInfo.utilisateur;
+
+          // Assignation des informations de l'utilisateur dans les éléments HTML
+          document.getElementById("username").textContent =
+            utilisateur.nom_utilisateur;
+          document.getElementById("password").textContent =
+            utilisateur.mot_de_passe;
+
+          // Récupération des parties jouées par l'utilisateur
+          const responseUserParties = await fetch(
+            "http://localhost:4000/api/user-parties",
             {
               credentials: "include",
             }
           );
-          console.log("Réponse reçue :", responseUserInfo);
-          const dataUserInfo = await responseUserInfo.json();
-          console.log("Données reçues :", dataUserInfo);
+          const dataUserParties = await responseUserParties.json();
 
-          if (responseUserInfo.ok) {
-            console.log(
-              "Informations utilisateur récupérées avec succès :",
-              dataUserInfo.utilisateur
-            );
-            const utilisateur = dataUserInfo.utilisateur;
-            const userInfoElement = document.getElementById("userInfo");
-            userInfoElement.innerHTML = `
-        <p><strong>ID:</strong> ${utilisateur.utilisateur_id}</p>
-        <p><strong>Nom d'utilisateur:</strong> ${utilisateur.nom_utilisateur}</p>
-        <p><strong>Mot de passe:</strong> ${utilisateur.mot_de_passe}</p>
-      `;
+          if (responseUserParties.ok) {
+            const userParties = dataUserParties.parties;
 
-            // Maintenant, récupérons les parties jouées par l'utilisateur
-            console.log("Récupération des parties jouées par l'utilisateur...");
-            const responseUserParties = await fetch(
-              "http://localhost:4000/api/user-parties",
-              {
-                credentials: "include",
-              }
-            );
-            console.log("Réponse reçue :", responseUserParties);
-            const dataUserParties = await responseUserParties.json();
-            console.log("Données reçues :", dataUserParties);
+            // Construction de l'affichage des parties jouées par l'utilisateur
+            const userPartiesElement = document.getElementById("userParties");
+            userPartiesElement.innerHTML = "<div></div>";
 
-            if (responseUserParties.ok) {
-              console.log(
-                "Parties jouées par l'utilisateur récupérées avec succès :",
-                dataUserParties.parties
-              );
-              // Afficher les parties jouées par l'utilisateur dans la page utilisateur
-              const userPartiesElement = document.createElement("div");
-              userPartiesElement.innerHTML =
-                "<h3>Parties jouées par l'utilisateur :</h3>";
-              dataUserParties.parties.forEach((partie) => {
-                const partieInfo = document.createElement("p");
-                partieInfo.textContent = `Partie ID: ${partie.partie_id}, Choix: ${partie.choix}`;
-                userPartiesElement.appendChild(partieInfo);
-              });
-              userInfoElement.appendChild(userPartiesElement);
-            } else {
-              console.error(
-                "Erreur lors de la récupération des parties jouées par l'utilisateur :",
-                dataUserParties.message
-              );
-            }
+            userParties.forEach((partie) => {
+              const partieDiv = document.createElement("div");
+              partieDiv.id = "partie-info";
+              partieDiv.style.minHeight = "100px";
+
+              const rowPartieDiv = document.createElement("div");
+              rowPartieDiv.id = "row-partie";
+              rowPartieDiv.style.display = "flex";
+              rowPartieDiv.style.flexDirection = "row";
+              rowPartieDiv.style.justifyContent = "flex-start";
+              rowPartieDiv.style.borderBottom = "1px solid #ffffff";
+              rowPartieDiv.style.paddingBottom = "15px";
+
+              const partieTitle = document.createElement("h3");
+              partieTitle.id = "partie-title";
+
+              // Création d'un span pour encadrer les parties historique_id et date_jouee
+              const partieInfoSpan = document.createElement("span");
+              partieInfoSpan.style.display = "flex";
+              partieInfoSpan.style.flexDirection = "row";
+
+              partieInfoSpan.style.justifyContent = "space-between";
+
+              const partieIdHeader = document.createElement("h2");
+              partieIdHeader.textContent = `Partie N°${partie.historique_id}`;
+              partieIdHeader.style.marginRight = "10px"; // Marge à droite pour séparer les éléments
+              partieIdHeader.style.marginTop = "0"; // Marge à droite pour séparer les éléments
+              partieIdHeader.style.marginBottom = "0"; // Marge à droite pour séparer les éléments
+              partieInfoSpan.appendChild(partieIdHeader);
+
+              const partieDateHeader = document.createElement("h2");
+              partieDateHeader.textContent = `${partie.date_jouee}`;
+              partieDateHeader.style.fontSize = "0.8em"; // Taille de la police plus petite
+              partieDateHeader.style.marginTop = "0"; // Marge en haut
+              partieInfoSpan.appendChild(partieDateHeader);
+
+              partieTitle.appendChild(partieInfoSpan);
+
+              partieTitle.style.fontFamily = "Bebas Neue, sans-serif"; // Police Bebas Neue
+              partieTitle.style.marginTop = "15px"; // Marge en haut
+              partieTitle.style.fontSize = "1.5em"; // Taille de la police
+
+              const partieChoiceTitle = document.createElement("p");
+              partieChoiceTitle.id = "partie-choice-title";
+              partieChoiceTitle.style.width = "150px"; // Largeur de la colonne de gauche
+              partieChoiceTitle.textContent = "Choix: ";
+              partieChoiceTitle.style.fontFamily = "Bebas Neue, sans-serif"; // Police Bebas Neue
+              partieChoiceTitle.style.fontSize = "1.3em"; // Taille de la police
+              partieChoiceTitle.style.margin = "0"; // Marge à droite
+
+              const partieChoice = document.createElement("p");
+              partieChoice.id = "partie-choice";
+              partieChoice.style.wordWrap = "break-word"; // Pour permettre le passage à la ligne
+              partieChoice.textContent = partie.choix;
+              partieChoice.style.width = "600px"; // Largeur de la colonne de droite
+              partieChoice.style.fontFamily = "Bebas Neue, sans-serif"; // Police Bebas Neue
+              partieChoice.style.fontSize = "1.4em"; // Taille de la police
+              partieChoice.style.margin = "0"; // Marge à gauche
+
+              rowPartieDiv.appendChild(partieChoiceTitle);
+              rowPartieDiv.appendChild(partieChoice);
+
+              partieDiv.appendChild(partieTitle);
+              partieDiv.appendChild(rowPartieDiv);
+
+              userPartiesElement.appendChild(partieDiv);
+            });
           } else {
             console.error(
-              "Erreur lors de la vérification de l'état de connexion :",
-              dataUserInfo.message
+              "Erreur lors de la récupération des parties jouées par l'utilisateur :",
+              dataUserParties.message
             );
-            window.location.href = "/connexion.html";
           }
-        } catch (error) {
+        } else {
           console.error(
-            "Erreur lors de la récupération des informations de l'utilisateur :",
-            error
+            "Erreur lors de la vérification de l'état de connexion :",
+            dataUserInfo.message
           );
+          window.location.href = "/connexion.html";
         }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des informations de l'utilisateur :",
+          error
+        );
       }
+    }
 
-      fetchUserInfo();
-    </script>
-  </body>
+    // Appel de la fonction pour récupérer et afficher les informations de l'utilisateur
+    fetchUserInfo();
+  </script>
+
+
 </html>

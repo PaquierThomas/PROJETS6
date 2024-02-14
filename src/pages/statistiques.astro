@@ -13,7 +13,112 @@ const parties = (await fetch(
 import "../styles/global.css";
 ---
 
-<style>
+<style scoped>
+  nav {
+    position: absolute;
+    display: flex;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    z-index: 10;
+    color: #ffffff;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 25px !important;
+  }
+
+  nav img {
+    height: 40px;
+  }
+
+  nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-right: 30px;
+    gap: 40px;
+    font-size: 25px !important;
+  }
+
+  nav ul li {
+    margin-left: 20px;
+  }
+
+  nav ul li a,
+  nav div a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+  }
+
+  nav div a {
+    color: white;
+  }
+
+  nav ul li a:hover {
+    color: white;
+  }
+  .isolated {
+    color: rgba(255, 255, 255, 0.85) !important;
+    background-color: #b53926;
+    padding: 7px 14px;
+    transition: all 0.2s ease-in-out;
+  }
+  .isolated:hover {
+    color: white !important;
+  }
+
+  #connexionLink {
+    color: rgba(255, 255, 255, 0.85) !important;
+    background-color: rgb(181, 57, 38);
+    padding: 7px 14px;
+    transition: all 0.2s ease-in-out;
+  }
+  #connexionLink:hover {
+    color: white !important;
+    cursor: pointer;
+    background: #a23322;
+    a {
+      color: white !important;
+    }
+  }
+
+  /* Importation de la police Bebas Neue */
+  @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+  #blanco hr {
+    border: 0;
+    height: 3px;
+    background-color: #cd412b;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    color: white;
+  }
+  #blanco a {
+    color: white;
+  }
+
+  .profil {
+    background: #1b1b1b;
+    color: rgba(255, 255, 255, 0.7);
+    border: rgb(76, 73, 70) 2px solid;
+    padding: 0 10px;
+    /* padding-bottom: -10px; */
+    height: 40px;
+    background-image: url("/images/noise.webp");
+  }
+  .profil:hover {
+    color: white;
+    background: #4c4946;
+  }
+  a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  a:nth-child(2) {
+    color: rgba(255, 255, 255, 0.7);
+  }
   /* Style pour la flexbox */
   /* Style pour la flexbox */
   .container {
@@ -46,6 +151,7 @@ import "../styles/global.css";
     flex-direction: column;
     align-items: center;
     position: relative;
+    background-image: url("/images/noise.webp");
   }
 
   /* img {
@@ -108,7 +214,7 @@ import "../styles/global.css";
       color: #ffffff;
     }
   }
-  .isolated {
+  .isolated-ul {
     display: flex;
     align-self: center;
     justify-content: center;
@@ -197,10 +303,41 @@ import "../styles/global.css";
         svg.setAttribute("width", "1100px");
         svg.setAttribute("height", "1100px");
 
-        svg.setAttribute("fill", "rgba(255, 255, 255, 0.4)");
+        svg.setAttribute("fill", "rgba(181, 57, 38, 0.4)");
+        svg.setAttribute("z-index", "-1");
       }
     });
   });
+
+  // Fonction pour vérifier si l'utilisateur est connecté
+  async function checkUserAuthentication() {
+    try {
+      console.log("Vérification de l'authentification de l'utilisateur...");
+      const response = await fetch("http://localhost:4000/api/verify-login", {
+        credentials: "include",
+      });
+      console.log("Réponse reçue :", response);
+      const data = await response.json();
+      console.log("Données reçues :", data);
+
+      if (response.ok) {
+        console.log("L'utilisateur est connecté !");
+        // Afficher le lien profil et masquer le lien connexion
+        document.getElementById("connexionLink").style.display = "none";
+        document.getElementById("profilLink").style.display = "block";
+      } else {
+        console.error("L'utilisateur n'est pas authentifié :", data.message);
+      }
+    } catch (error) {
+      console.error(
+        "Erreur lors de la vérification de l'authentification :",
+        error
+      );
+    }
+  }
+
+  // Appeler la fonction pour vérifier l'authentification de l'utilisateur
+  checkUserAuthentication();
 </script>
 
 <html lang="en">
@@ -209,7 +346,26 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Statistiques des choix</title>
   </head>
+
   <body>
+    <!-- Nav -->
+    <nav>
+      <div>
+        <a href="/">An Enshrouded Encounter</a>
+      </div>
+      <ul>
+        <li><a href="/story">Histoire</a></li>
+        <li><a href="/characters">Personnages</a></li>
+        <li id="blanco"><a href="/statistiques">Statistiques</a><hr /></li>
+        <li id="connexionLink">
+          <a href="/connexion">Connexion</a>
+        </li>
+        <li id="profilLink" class="profil" style="display:none;">
+          <a href="/utilisateur">Profil</a>
+        </li>
+      </ul>
+    </nav>
+
     <div class="container" id="random-images-container">
       <!-- Les images seront ajoutées ici par JavaScript -->
     </div>

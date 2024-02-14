@@ -9,6 +9,9 @@
         font-family: "Source Sans Pro", sans-serif;
         margin: 0;
         padding: 0;
+        background-image: url("/images/noise.webp");
+        background: #181930;
+        color: #ffffff;
       }
       .container {
         display: flex;
@@ -18,7 +21,6 @@
         padding-top: 7%;
         overflow: hidden;
         height: 100vh;
-        background: #262421;
       }
 
       .row {
@@ -84,7 +86,7 @@
         margin: 0;
       }
       .partie-texte {
-        color: rgb(201, 178, 153);
+        color: #e4dad1;
         font-family: var(--font-source);
         line-height: 32px;
         font-size: 24px;
@@ -100,14 +102,14 @@
       .index {
         font-size: 24px;
 
-        color: rgb(201, 178, 153);
+        color: #e4dad1;
       }
       .index-fleche {
         display: flex;
         align-items: center;
       }
       svg {
-        color: rgb(201, 178, 153);
+        color: #e4dad1;
         stroke-width: 3px;
       }
     </style>
@@ -166,16 +168,17 @@
                 console.log("Traitement du choix :", choix);
                 const card = document.createElement("div");
                 card.classList.add("square");
-                card.style.border = "2px solid rgba(95, 73, 50, 0.6)";
+                card.style.border = "2px solid rgba(76, 73, 70, 0.6)";
                 card.style.borderRadius = "5px";
                 card.style.display = "flex";
                 card.style.flexDirection = "column";
                 card.style.justifyContent = "flex-end";
-                card.style.backgroundColor = "#372f26";
+                card.style.backgroundColor = "#21233B";
                 card.style.width = "400px";
                 card.style.height = "400px";
                 card.style.cursor = "pointer";
                 card.style.transition = "all 0.3s ease-in-out";
+                card.style.backgroundImage = "url('/images/noise.webp')";
 
                 const innerSquare = document.createElement("div");
                 innerSquare.classList.add("inner-square");
@@ -186,12 +189,13 @@
                 innerSquare.style.display = "flex";
                 innerSquare.style.justifyContent = "center";
                 innerSquare.style.alignItems = "center";
+                innerSquare.style.transition = "all 0.3s ease-in-out";
 
                 const image = document.createElement("img");
-                image.src = `/images/characters/${choix.image_url}`;
+                image.src = `/images/symbols/story/${choix.image_url}`;
                 image.alt = "Votre Image";
-                image.style.maxWidth = "100%";
-                image.style.maxHeight = "100%";
+                image.style.maxWidth = "65%";
+                image.style.maxHeight = "65%";
 
                 innerSquare.appendChild(image);
                 card.appendChild(innerSquare);
@@ -204,36 +208,42 @@
                 textContainer.style.paddingLeft = "10px";
                 textContainer.style.paddingBottom = "5px";
                 textContainer.style.gap = "5px";
-                textContainer.style.color = "rgb(201, 178, 153)";
+                textContainer.style.color = "#e4dad1";
                 textContainer.style.fontFamily = "Source Sans Pro, sans-serif";
+                textContainer.style.transition = "all 0.15s ease-in-out";
 
                 const span = document.createElement("span");
                 span.textContent = String.fromCharCode(65 + index);
                 span.style.fontSize = "18px";
                 span.style.lineHeight = "1.1";
                 span.style.fontWeight = "bold";
-                span.style.background = "#262421";
+                span.style.background = "#1b1b1b";
                 span.style.padding = "2px 7px";
-                span.style.border = "1px solid rgba(95, 73, 50, 0.6)";
+                span.style.border = "1px solid rgba(76, 73, 70, 0.6)";
                 span.style.borderRadius = "5px";
+                span.style.transition = "all 0.15s ease-in-out";
 
                 card.addEventListener("mouseenter", function () {
                   // Apply styles when mouse enters
-                  span.style.color = "#262421";
-                  span.style.background = "rgb(201, 178, 153)";
-                  span.style.border = "2px solid #262421";
+                  span.style.color = "white";
+                  span.style.background = "#cd412b";
+                  span.style.border = "none";
+                  textContainer.style.color = "#cd412b";
 
-                  card.style.border = "2px solid rgb(201, 178, 153)";
+                  card.style.border = "2px solid #cd412b";
+                  card.style.transform = "translateY(-5px)";
                 });
 
                 // Add event listener for mouse leaving the element
                 card.addEventListener("mouseleave", function () {
                   // Apply styles when mouse leaves
-                  span.style.color = "rgb(201, 178, 153)";
-                  span.style.background = "#262421";
-                  span.style.border = "1px solid rgba(95, 73, 50, 0.6)";
+                  span.style.color = "#e4dad1";
+                  span.style.background = "#1b1b1b";
+                  span.style.border = "1px solid rgba(76, 73, 70, 0.6)";
+                  textContainer.style.color = "#e4dad1";
 
-                  card.style.border = "2px solid rgba(95, 73, 50, 0.6)";
+                  card.style.border = "2px solid rgba(76, 73, 70, 0.6)";
+                  card.style.transform = "translateY(0)";
                 });
 
                 const h2 = document.createElement("h2");

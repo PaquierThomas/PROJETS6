@@ -12,7 +12,7 @@ import "../styles/global.css";
   </head>
   <body>
     <div class="container">
-      <img src="" alt="SVG" id="random-svg" />
+      <object type="image/svg+xml" data="" id="random-svg"></object>
       <h1 id="end-game-message">Fin du jeu</h1>
       <h2 id="end-game-info">
         <!-- Les informations de fin de jeu seront ajoutées ici -->
@@ -35,7 +35,6 @@ import "../styles/global.css";
         "/images/symbols/ovni.svg",
         "/images/symbols/hand.svg",
         "/images/symbols/story/battery.svg",
-        "/images/symbols/story/unknow.svg",
         "/images/symbols/story/walle.svg",
         "/images/symbols/story/neutral.svg",
       ];
@@ -46,8 +45,22 @@ import "../styles/global.css";
         return svgs[index];
       }
 
-      // Mettre le SVG aléatoire dans l'image
-      document.getElementById("random-svg").src = choisirSVGAléatoire();
+      document.addEventListener("DOMContentLoaded", () => {
+        const svgPath = choisirSVGAléatoire();
+        const svgElement = document.getElementById("random-svg");
+
+        svgElement.data = svgPath;
+
+        svgElement.onload = function () {
+          const svgDoc = svgElement.contentDocument;
+          if (svgDoc && svgDoc.documentElement) {
+            const paths = svgDoc.querySelectorAll("path");
+            paths.forEach((path) => {
+              path.style.fill = "#a23322";
+            });
+          }
+        };
+      });
 
       // Array contenant les propositions
       const propositions = [
@@ -115,12 +128,16 @@ import "../styles/global.css";
 </html>
 
 <style scoped>
+  @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
   body {
-    background: brown;
+    background: #181930;
+    color: #ffffff;
+    background-image: url("/images/noise.webp");
   }
 
   #random-svg {
-    fill: white;
+    fill: #a23322;
     width: 550px;
     height: 550px;
   }
@@ -140,7 +157,6 @@ import "../styles/global.css";
   }
 
   #end-game-message {
-    color: #faebd7;
     font-size: 3rem;
     font-weight: bold;
     font-family: var(--font-sego);
@@ -156,24 +172,34 @@ import "../styles/global.css";
 
   button {
     background-color: transparent;
-    border: 3px solid #faebd7; /* Blanc antique */
-    color: #faebd7; /* Blanc antique */
+    color: white;
+    border: none;
     font-weight: bold;
-    font-family: var(--font-sego);
-    border-radius: 5px;
+    font-family: "Bebas Neue", sans-serif;
+
     padding: 12px 25px; /* Ajustez selon vos besoins */
     cursor: pointer;
     outline: none; /* Supprime la bordure de focus */
     font-size: 1.5em; /* Double la taille du texte */
+    transition: all 0.15s ease-in-out;
   }
   button:nth-child(1) {
-    background-color: #faebd7;
-    color: brown;
+    background-color: #b53926;
+  }
+  button:nth-child(2) {
+    border: 3px solid #4c4946;
+    background-color: #1b1b1b;
+    color: #e4dad1;
+    background-image: url("/images/noise.webp");
   }
 
   /* Style de survol */
-  button:hover {
-    background-color: #faebd7; /* Blanc antique */
-    color: brown; /* Couleur du texte au survol */
+  button:nth-child(1):hover {
+    background-color: #a23322;
+    color: white; /* Couleur du texte au survol */
+  }
+  button:nth-child(2):hover {
+    background-color: #4c4946;
+    color: white; /* Couleur du texte au survol */
   }
 </style>
