@@ -7,6 +7,7 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/icons/Icon.jpg" type="image/svg+xml" />
     <title>Connexion / Inscription</title>
   </head>
 
@@ -117,8 +118,10 @@ import "../styles/global.css";
 
     /* Styles pour les images */
     .ml-img {
-      margin-left: -40px;
-      margin-bottom: 20px;
+      margin-left: -70px;
+      margin-top: -5px;
+      width: 75px;
+      position: absolute;
     }
 
     /* Styles pour les titres */
@@ -127,6 +130,7 @@ import "../styles/global.css";
       font-size: 2.5rem;
       font-family: var(--font-sego);
       color: white;
+      margin-top: 10px;
     }
 
     /* Styles pour le texte */
@@ -215,14 +219,15 @@ import "../styles/global.css";
       font-weight: 400;
       border-radius: 0.35rem;
       color: rgba(255, 255, 255, 0.7);
-      background-color: #4c4946;
+      background-color: #1f1f1f;
       background-clip: padding-box;
       border-width: 2px;
       border-style: solid;
-      border-color: #4c4946;
+      border-color: #1f1f1f;
       transition: all 0.3s ease-in-out;
       margin: 0;
       font-family: var(--font-sego);
+      background-image: url("/images/noise.webp");
     }
 
     /* Styles pour la case à cocher */
@@ -259,6 +264,68 @@ import "../styles/global.css";
     #message {
       color: white;
     }
+
+    @media (min-width: 1400px) {
+      body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .flex-container {
+        width: 90%;
+        height: 90vh;
+        padding-top: 10px;
+        top: 4%;
+        left: 4%;
+        position: absolute;
+      }
+      .right-content {
+        height: 102%;
+        width: 40%;
+        margin-bottom: 5px;
+        margin-left: 14.1rem;
+      }
+      .right-content img {
+        width: 115%;
+        height: 100%;
+      }
+
+      .form {
+        width: 100%;
+        margin-left: 40px;
+        margin-top: 50px; /* Default margin for all elements with class 'form' */
+      }
+
+      form:last-of-type {
+        margin-top: 0px; /* Overrides margin-top for the first form element */
+      }
+
+      .form-group {
+        margin-left: 0px;
+      }
+      .submit-btn {
+        width: 103%;
+      }
+      .centered-text {
+        margin-left: 85px;
+      }
+      .options {
+        margin-left: 38px;
+        padding-bottom: 20px;
+        margin-top: 4px;
+      }
+      .forgot-password {
+        margin-right: -50px;
+        /* color: red; */
+      }
+
+      .title {
+        font-size: 2rem;
+        position: absolute;
+        /* margin-bottom: 10px; */
+        top: 10%;
+      }
+    }
   </style>
 
   <body
@@ -271,7 +338,7 @@ import "../styles/global.css";
                 <a href="/"
                   ><img
                     class="mb-6 ml-img"
-                    src="/image/Logo_noir.svg"
+                    src="/icons/logo.svg"
                     alt="logo du site"
                   /></a
                 >

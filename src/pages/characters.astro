@@ -72,7 +72,7 @@ import "../styles/global.css";
     // Mettre à jour le fond en fonction du personnage
     if (character.tags.includes("ingénieur")) {
       body.style.backgroundColor = "#181930"; // Utilisez la couleur actuelle pour Robot
-      backgroundRect.setAttribute("fill", "rgba(236, 28, 36,.8)"); // Couleur actuelle pour Robot
+      backgroundRect.setAttribute("fill", "rgba(24, 25, 48,.8)"); // Couleur actuelle pour Robot
     } else if (character.tags.includes("artiste")) {
       body.style.backgroundColor = "#1F4155"; // Utilisez du bleu pour Alien
       backgroundRect.setAttribute("fill", "#1D4D5C"); // Bleu foncé pour Alien
@@ -143,24 +143,29 @@ import "../styles/global.css";
 
 <head>
   <meta charset="utf-8" />
-  <title>Personnages</title>
+  <title>Characters</title>
+  <link rel="icon" href="/icons/Icon.jpg" type="image/svg+xml" />
 </head>
 
 <body>
   <!-- Nav -->
   <nav>
     <div>
-      <a href="/">An Enshrouded Encounter</a>
+      <a id="logo" href="/"
+        ><img src="/icons/logo.svg" alt="logo" /><h2>
+          An Enshrouded Encounter
+        </h2></a
+      >
     </div>
     <ul>
-      <li><a href="/story">Histoire</a></li>
-      <li id="blanco"><a href="/characters">Personnages</a><hr /></li>
-      <li><a href="/statistiques">Statistiques</a></li>
+      <li><a href="/story">Story</a></li>
+      <li id="blanco"><a href="/characters">Characters</a><hr /></li>
+      <li><a href="/statistiques">Statistics</a></li>
       <li id="connexionLink" class="isolated">
         <a href="/connexion">Connexion</a>
       </li>
       <li id="profilLink" class="profil" style="display:none;">
-        <a href="/utilisateur">Profil</a>
+        <a href="/utilisateur">Profile</a>
       </li>
     </ul>
   </nav>
@@ -192,6 +197,13 @@ import "../styles/global.css";
 </svg>
 
 <style scoped>
+  #logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+  }
   nav {
     position: absolute;
     display: flex;
@@ -212,6 +224,7 @@ import "../styles/global.css";
 
   nav ul {
     display: flex;
+    align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -248,6 +261,12 @@ import "../styles/global.css";
     cursor: pointer;
     background: #a23322;
   }
+  #connexionLink {
+    height: 34px;
+    position: relative;
+    display: flex;
+    padding-top: 4px;
+  }
 
   /* Importation de la police Bebas Neue */
   @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
@@ -263,6 +282,9 @@ import "../styles/global.css";
     color: white;
   }
 
+  #blanco {
+    margin-top: 8px;
+  }
   .profil {
     background: #1b1b1b;
     color: rgba(255, 255, 255, 0.7);
@@ -416,6 +438,7 @@ import "../styles/global.css";
     position: relative;
     overflow: hidden;
     background-color: #171d29;
+    background-image: url("/images/noise.webp");
   }
   svg rect {
     position: absolute;
@@ -425,5 +448,6 @@ import "../styles/global.css";
     height: 40%;
     transform: rotate(38deg) translate(-0%, -30%);
     z-index: 0;
+    background-image: url("/images/noise.webp");
   }
 </style>

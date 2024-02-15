@@ -34,6 +34,7 @@ import "../styles/global.css";
 
   nav ul {
     display: flex;
+    align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -74,6 +75,7 @@ import "../styles/global.css";
     color: rgba(255, 255, 255, 0.85) !important;
     background-color: rgb(181, 57, 38);
     padding: 7px 14px;
+
     transition: all 0.2s ease-in-out;
   }
   #connexionLink:hover {
@@ -126,9 +128,9 @@ import "../styles/global.css";
     flex-direction: column; /* Alignement en colonne */
     align-items: center; /* Centrage horizontal */
     position: absolute;
-    top: 150px;
-    left: -500px;
-    gap: 500px; /* Réduire l'espacement entre les images */
+    top: 75px;
+    left: -400px;
+    gap: 150px; /* Réduire l'espacement entre les images */
   }
 
   .container2 {
@@ -136,9 +138,9 @@ import "../styles/global.css";
     flex-direction: column; /* Alignement en colonne */
     align-items: center; /* Centrage horizontal */
     position: absolute;
-    top: 150px;
-    right: -500px;
-    gap: 500px; /* Réduire l'espacement entre les images */
+    top: 75px;
+    right: -400px;
+    gap: 150px; /* Réduire l'espacement entre les images */
   }
 
   /* Style pour les images */
@@ -147,6 +149,7 @@ import "../styles/global.css";
     background: #181930;
     color: #ffffff;
     font-family: var(--font-sego);
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -229,6 +232,19 @@ import "../styles/global.css";
   li span {
     font-weight: bold;
   }
+  #logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    h2 {
+      font-size: 25px;
+    }
+    img {
+      margin-top: -10px;
+    }
+  }
 
   /* Styles CSS pour la mise en forme des statistiques */
   .embranchement-stats {
@@ -243,6 +259,41 @@ import "../styles/global.css";
   .embranchement-stats p {
     margin: 5px 0;
     color: rgb(236, 28, 36);
+  }
+
+  @media (min-width: 1400px) {
+    #connexionLink {
+      height: 34px;
+      position: relative;
+      display: flex;
+      padding-top: 4px;
+    }
+    #blanco hr {
+      margin-top: -5px;
+      margin-bottom: 10px;
+    }
+    #blanco {
+      margin-top: 10px;
+    }
+    H1 {
+      font-size: 50px;
+      margin-top: 8%;
+    }
+    p {
+      font-size: 20px;
+    }
+    .embranchement-stats h3 {
+      font-size: 20px;
+    }
+    .part {
+      font-size: 20px;
+      width: 70vw;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .isolated {
+      margin-left: 120px;
+    }
   }
 </style>
 
@@ -300,11 +351,11 @@ import "../styles/global.css";
         const svg = svgDocument.querySelector("svg");
 
         // Définir la taille de l'élément <svg>
-        svg.setAttribute("width", "1100px");
-        svg.setAttribute("height", "1100px");
+        svg.setAttribute("width", "700px");
+        svg.setAttribute("height", "700px");
 
         svg.setAttribute("fill", "rgba(181, 57, 38, 0.4)");
-        svg.setAttribute("z-index", "-1");
+        svg.setAttribute("z-index", "-100");
       }
     });
   });
@@ -351,17 +402,21 @@ import "../styles/global.css";
     <!-- Nav -->
     <nav>
       <div>
-        <a href="/">An Enshrouded Encounter</a>
+        <a id="logo" href="/"
+          ><img src="/icons/logo.svg" alt="logo" /><h2>
+            An Enshrouded Encounter
+          </h2></a
+        >
       </div>
       <ul>
-        <li><a href="/story">Histoire</a></li>
-        <li><a href="/characters">Personnages</a></li>
-        <li id="blanco"><a href="/statistiques">Statistiques</a><hr /></li>
+        <li><a href="/story">Story</a></li>
+        <li><a href="/characters">Characters</a></li>
+        <li id="blanco"><a href="/statistiques">Statistics</a><hr /></li>
         <li id="connexionLink">
           <a href="/connexion">Connexion</a>
         </li>
         <li id="profilLink" class="profil" style="display:none;">
-          <a href="/utilisateur">Profil</a>
+          <a href="/utilisateur">Profile</a>
         </li>
       </ul>
     </nav>
@@ -372,12 +427,12 @@ import "../styles/global.css";
     <div class="container2" id="random-images-container1">
       <!-- Les images seront ajoutées ici par JavaScript -->
     </div>
-    <h1>Statistiques des choix empruntés par les joueurs</h1>
+    <h1 class="title">Statistiques des choix empruntés par les joueurs</h1>
     <div>
       {
         parties.map((p) => (
           <div>
-            <h2>
+            <h2 class="part">
               {p.partie_text}
               <span>
                 <span>{p.totalChoix}</span>{" "}

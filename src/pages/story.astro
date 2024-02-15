@@ -1,0 +1,620 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Présentation</title>
+  <link rel="icon" href="/icons/Icon.jpg" type="image/svg+xml" />
+</head>
+<body>
+  <div id="scrollToTop">&#9650;</div>
+  <nav>
+    <div>
+      <a id="logo" href="/"
+        ><img src="/icons/logo.svg" alt="logo" /><h2>
+          An Enshrouded Encounter
+        </h2></a
+      >
+    </div>
+    <ul>
+      <li id="blanco"><a href="/story">Story</a><hr /></li>
+      <li><a href="/characters">Characters</a></li>
+      <li><a href="/statistiques">Statistics</a></li>
+      <li id="connexionLink">
+        <a href="/connexion">Connexion</a>
+      </li>
+      <li id="profilLink" class="profil" style="display:none;">
+        <a href="/utilisateur">Profile</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <h1>Probe the unknown</h1>
+      <p>
+        Venture into uncharted territories, where mysteries lie in wait. With
+        courage as your guide, probe the unknown and unlock the secrets of a
+        world shrouded in enigma.
+      </p>
+      <div class="row">
+        <button><a href="/connexion">Connexion</a></button><button
+          ><a href="/game">PLAY</a></button
+        >
+      </div>
+    </div>
+    <video src="/dome.mp4" autoplay muted loop></video>
+    <div class="overlay"></div>
+  </main>
+
+  <section class="discover">
+    <div class="right">
+      <img
+        src="/images/characters/alien.png"
+        alt="Personnage de l'histoire intéractive"
+        class="alien"
+      />
+    </div>
+    <div class="left">
+      <h2>Uncover</h2>
+      <h3>The hidden secrets</h3>
+      <p>
+        In the depths of history lie buried secrets, patiently waiting to be
+        uncovered. Immerse yourself in a captivating narrative where each twist
+        reveals new truths, where ancient mysteries intertwine with the
+        destinies of the protagonists. Prepare for an epic adventure where every
+        discovery illuminates the path towards the ultimate truth.
+      </p>
+      <button><a href="/game">Play the game</a></button>
+    </div>
+  </section>
+  <section class="break">
+    <h2>How to play?</h2>
+    <h3 class="subtitle">
+      You will encounter some icons along your journey, here's a quick guide on
+      how to interpret them
+    </h3>
+    <div class="row2">
+      <div class="colonne">
+        <img src="/images/symbols/story/walle.svg" alt="" />
+        <h3>The robot</h3>
+        <p>
+          Following the robot's path merges humanity with technology, shaping a
+          destiny where decisions blur the lines between man and machine.
+        </p>
+      </div>
+      <div class="colonne">
+        <img src="/images/symbols/story/alien.svg" alt="" />
+        <h3>The tracker</h3>
+        <p>
+          Venturing down the tracker's path promises a journey filled with
+          unexpected twists, where every step taken forges a legacy, whether for
+          better or for worse.
+        </p>
+      </div>
+      <div class="colonne">
+        <img src="/images/symbols/story/soul.svg" alt="" />
+        <h3>Humanity side</h3>
+        <p>
+          Choosing the path of humanity ensures a steadfast grip on sanity
+          amidst chaos, forging a legacy the world will forever remember.
+        </p>
+      </div>
+      <div class="colonne">
+        <img src="/images/symbols/story/unknow.svg" alt="" />
+        <h3>Unknow way</h3>
+        <p>
+          Choosing the path of the unknown is a gamble, each step unfolding a
+          mysterious narrative, where uncertainty fuels the journey's intrigue.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="discover">
+    <div class="left">
+      <h2>Discover</h2>
+      <h3>Intricate relationships</h3>
+      <p>
+        Explore a world of intrigue and deep connections through an immersive
+        interactive story. Dive into captivating narratives where every choice
+        matters, uncover richly developed characters, and navigate complex
+        relationships that shape your adventure.
+      </p>
+      <button><a href="/characters">Learn more</a></button>
+    </div>
+    <div class="right">
+      <img
+        src="/images/characters/robot.png"
+        alt="Personnage de l'histoire intéractive"
+      />
+    </div>
+  </section>
+  <section class="about">
+    <img src="/icons/logo.svg" alt="" />
+    <h2>About the game</h2>
+    <p>
+      Certainly! Here's a condensed version: The idea for "Enshrouded
+      Encounter," an interactive story brimming with mysteries, dawned from my
+      passion for immersive gameplay. Inspired by the allure of enigmatic
+      narratives, I envisioned a tale where player choices shape the journey,
+      unveiling secrets at every turn. With "Enshrouded Encounter," I sought to
+      blend captivating storytelling with player agency, creating an
+      unforgettable experience that blurs the line between reality and fiction.
+    </p>
+    <p>
+      The game is designed to be accessible to players of all skill levels, with
+      a user-friendly interface and intuitive controls. Whether you're new to
+      interactive stories or a seasoned veteran, An Enshrouded Encounter offers
+      a compelling experience that will keep you engaged from start to finish.
+    </p>
+  </section>
+  <style scoped>
+    #scrollToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 64px;
+      cursor: pointer;
+      z-index: 9999;
+      transition: all 0.2s ease-in-out;
+    }
+    #scrollToTop:hover {
+      color: #b53926;
+    }
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+    .about {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 100px 0px;
+      h2 {
+        font-family: "Poppins", sans-serif;
+        font-size: 44px;
+        font-weight: 700;
+      }
+
+      p {
+        width: 40%;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        color: #9f9f9f;
+        line-height: 28.8px;
+      }
+    }
+    #logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      h2 {
+        font-size: 25px;
+      }
+    }
+    .break {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #111221;
+      padding-bottom: 100px;
+
+      h2 {
+        font-size: 80px;
+        font-family: "Bebas Neue", sans-serif;
+        margin-bottom: 0;
+      }
+      .subtitle {
+        font-size: 20px;
+        margin-top: 0;
+        color: #bab1a8;
+        margin-bottom: 80px;
+        font-family: "open sans", sans-serif;
+      }
+    }
+    .row2 {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .colonne {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: "open sans", sans-serif;
+      width: 300px;
+
+      img {
+        width: 125px;
+      }
+      h3 {
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+      p {
+        width: 250px;
+        color: #9f9f9f;
+        text-align: center;
+        margin-top: 0;
+      }
+    }
+
+    .alien {
+      width: 550px;
+      height: 550px !important;
+      margin-top: 75px;
+    }
+    .row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .hero {
+      position: absolute;
+      top: 20%;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      /* justify-content: center; */
+      margin-left: 25%;
+
+      font-family: "Bebas Neue", sans-serif;
+      color: white;
+
+      width: 100%;
+      padding-left: 50px;
+
+      h1 {
+        font-size: 220px;
+        line-height: 0.85;
+        font-weight: bold;
+        width: 500px;
+      }
+      p {
+        font-size: 20px;
+        font-weight: 500;
+        /* margin-top: 20px; */
+        font-family: "open sans", sans-serif;
+        color: rgba(255, 255, 255, 0.9);
+
+        width: 660px;
+      }
+      button {
+        margin-top: 30px;
+
+        background: #b53926;
+        border: none;
+        width: fit-content;
+
+        padding: 10px 15px;
+        padding-bottom: 5px;
+
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 35px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      button:hover {
+        cursor: pointer;
+        background: #a23322;
+        a {
+          color: white;
+        }
+      }
+
+      button:nth-child(2) {
+        background: #1b1b1b;
+        color: rgba(255, 255, 255, 0.7);
+        border: #4c4946 2px solid;
+        /* background-image: url("/images/noise.webp"); */
+      }
+      button:nth-child(2):hover {
+        color: white;
+        background: #4c4946;
+      }
+      a {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      a:nth-child(2) {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+    main {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .overlay::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #4b0c02a5;
+    }
+    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+    .discover {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 80px;
+      padding: 40px;
+      background: #151413;
+      height: 500px;
+      margin: 0;
+      gap: 50px;
+      font-family: "Bebas Neue", sans-serif;
+    }
+    .discover:first-of-type {
+      padding-bottom: 90px;
+    }
+    .left {
+      /* padding: 0 20rem; */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0;
+      margin-top: 8%;
+      margin-left: 4%;
+      h2 {
+        font-size: 128px;
+        margin: 0;
+        line-height: 0.5;
+        color: #e4dad1;
+      }
+      h3 {
+        font-size: 64px;
+        margin: 0;
+        margin-top: -5px;
+        color: #bab1a8;
+      }
+      p {
+        width: 36vw;
+        line-height: 1.8;
+        font-size: 16px;
+        margin: 0;
+        font-family: "open sans", sans-serif;
+        color: #bab1a8;
+      }
+    }
+
+    button {
+      margin-top: 5px;
+      background: #b53926;
+      border: none;
+      width: fit-content;
+
+      padding: 10px 15px;
+      padding-bottom: 5px;
+
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 20px;
+      transition: all 0.2s ease-in-out;
+      color: white;
+    }
+
+    button:hover {
+      cursor: pointer;
+      background: #a23322;
+      a {
+        color: white;
+      }
+    }
+    .right {
+      img {
+        height: 600px;
+        transform: translateY(-50px);
+      }
+    }
+
+    body {
+      background: #181930;
+      color: #ffffff;
+      font-family: var(--font-sego);
+      margin: 0;
+      position: relative;
+      /* background-image: url("/images/noise.webp"); */
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: absolute;
+      display: flex;
+      left: 0;
+      right: 0;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 40px;
+      z-index: 10;
+      color: #ffffff;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 25px !important;
+    }
+
+    nav img {
+      height: 40px;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      padding-right: 30px;
+      gap: 40px;
+      font-size: 25px !important;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a,
+    nav div a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+    }
+
+    nav div a {
+      color: white;
+    }
+
+    nav ul li a:hover {
+      color: white;
+    }
+    .isolated {
+      color: rgba(255, 255, 255, 0.85) !important;
+      background-color: #b53926;
+      padding: 7px 14px;
+      transition: all 0.2s ease-in-out;
+    }
+    .isolated:hover {
+      color: white !important;
+    }
+
+    #connexionLink {
+      color: rgba(255, 255, 255, 0.85) !important;
+      background-color: rgb(181, 57, 38);
+      padding: 7px 14px;
+      transition: all 0.2s ease-in-out;
+    }
+    #connexionLink:hover {
+      color: white !important;
+      cursor: pointer;
+      background: #a23322;
+      a {
+        color: white !important;
+      }
+    }
+
+    /* Importation de la police Bebas Neue */
+    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+    #blanco hr {
+      border: 0;
+      height: 3px;
+      background-color: #cd412b;
+      margin-top: -5px;
+      margin-bottom: 10px;
+      color: white;
+    }
+    #blanco a {
+      color: white;
+    }
+
+    .profil {
+      background: #1b1b1b;
+      color: rgba(255, 255, 255, 0.7);
+      border: rgb(76, 73, 70) 2px solid;
+      padding: 0px 10px;
+      padding-top: 5px;
+      padding-bottom: 0;
+      height: 33px;
+      background-image: url("/images/noise.webp");
+    }
+    .profil:hover {
+      color: white;
+      background: #4c4946;
+    }
+    a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    a:nth-child(2) {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (min-width: 1400px) {
+      #blanco hr {
+        margin-top: 2px;
+        margin-bottom: 10px;
+      }
+      #blanco {
+        margin-top: 12px;
+      }
+      .hero {
+        top: 18%;
+      }
+      .hero h1 {
+        font-size: 180px;
+        margin: 0;
+        color: #e4dad1;
+      }
+      .hero p {
+        font-size: 18px;
+        width: 550px;
+        margin-bottom: 0;
+        margin-top: 0;
+        color: #e4dad1;
+      }
+      .hero button {
+        font-size: 25px;
+        margin-top: 20px;
+        color: #e4dad1;
+      }
+      .hero button a {
+        color: #e4dad1;
+      }
+    }
+  </style>
+
+  <script>
+    document
+      .getElementById("scrollToTop")
+      .addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    // Fonction pour vérifier si l'utilisateur est connecté
+    async function checkUserAuthentication() {
+      try {
+        console.log("Vérification de l'authentification de l'utilisateur...");
+        const response = await fetch("http://localhost:4000/api/verify-login", {
+          credentials: "include",
+        });
+        console.log("Réponse reçue :", response);
+        const data = await response.json();
+        console.log("Données reçues :", data);
+
+        if (response.ok) {
+          console.log("L'utilisateur est connecté !");
+          // Afficher le lien profil et masquer le lien connexion
+          document.getElementById("connexionLink").style.display = "none";
+          document.getElementById("profilLink").style.display = "block";
+        } else {
+          console.error("L'utilisateur n'est pas authentifié :", data.message);
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la vérification de l'authentification :",
+          error
+        );
+      }
+    }
+
+    // Appeler la fonction pour vérifier l'authentification de l'utilisateur
+    checkUserAuthentication();
+  </script>
+</body>

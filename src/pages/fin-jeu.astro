@@ -8,6 +8,7 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/icons/Icon.jpg" type="image/svg+xml" />
     <title>Fin du jeu</title>
   </head>
   <body>
@@ -141,6 +142,7 @@ import "../styles/global.css";
     width: 550px;
     height: 550px;
   }
+
   .container {
     display: flex;
     flex-direction: column;
@@ -201,5 +203,25 @@ import "../styles/global.css";
   button:nth-child(2):hover {
     background-color: #4c4946;
     color: white; /* Couleur du texte au survol */
+  }
+
+  @media (min-width: 1400px) {
+    #random-svg {
+      width: 350px;
+      height: 350px;
+      padding-bottom: 10px;
+    }
+    #end-game-message {
+      font-size: 2.5rem;
+      width: 60vw;
+
+      text-align: center;
+      line-height: 1.1;
+    }
+    #end-game-info {
+      font-size: 1.7rem;
+      width: 60vw;
+      text-align: center;
+    }
   }
 </style>

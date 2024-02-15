@@ -38,7 +38,8 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A Starry Encounter</title>
+    <title>An Enshrouded encounter</title>
+    <link rel="icon" href="/icons/Icon.jpg" type="image/svg+xml" />
   </head>
   <html>
     <!-- Nav -->
@@ -46,7 +47,11 @@ import "../styles/global.css";
       <!-- Nav -->
       <nav>
         <div>
-          <a href="/">An Enshrouded Meeting</a>
+          <a id="logo" href="/"
+            ><img src="/icons/logo.svg" alt="logo" /><h2>
+              An Enshrouded Encounter
+            </h2></a
+          >
         </div>
         <ul>
           <li id="blanco"><a href="/story">Story</a></li>
@@ -93,6 +98,13 @@ import "../styles/global.css";
   </html>
 
   <style scoped>
+    #logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+    }
     /* Importation de la police Bebas Neue */
     @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
     .row {
@@ -345,13 +357,25 @@ import "../styles/global.css";
       overflow: hidden;
     }
 
-    /* body {
-    background-image: url("/images/test.svg");
-    background-size: 135%; 
-    background-repeat: no-repeat; 
-    background-position: -160px; 
-  } */
-
-    /* Vos styles supplémentaires vont ici */
+    @media (min-width: 1400px) {
+      .centered {
+        width: 70vw;
+      }
+      .hero {
+        top: 22%;
+      }
+      .hero h1 {
+        font-size: 140px;
+      }
+      .hero p {
+        font-size: 18px;
+        width: 550px;
+        margin-bottom: 0;
+      }
+      .hero button {
+        font-size: 25px;
+        margin-top: 20px;
+      }
+    }
   </style>
 </html>
