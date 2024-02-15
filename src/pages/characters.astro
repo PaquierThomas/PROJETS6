@@ -70,13 +70,13 @@ import "../styles/global.css";
     const backgroundRect = document.querySelector("svg rect");
 
     // Mettre à jour le fond en fonction du personnage
-    if (character.tags.includes("ingénieur")) {
+    if (character.tags.includes("altruist")) {
       body.style.backgroundColor = "#181930"; // Utilisez la couleur actuelle pour Robot
       backgroundRect.setAttribute("fill", "rgba(24, 25, 48,.8)"); // Couleur actuelle pour Robot
-    } else if (character.tags.includes("artiste")) {
+    } else if (character.tags.includes("relentless")) {
       body.style.backgroundColor = "#1F4155"; // Utilisez du bleu pour Alien
       backgroundRect.setAttribute("fill", "#1D4D5C"); // Bleu foncé pour Alien
-    } else if (character.tags.includes("enseignante")) {
+    } else if (character.tags.includes("clumsy")) {
       body.style.backgroundColor = " #C0963D"; // Utilisez du vert pour Humain
       backgroundRect.setAttribute("fill", "#6185A5 "); // Vert foncé pour Humain
     }
@@ -186,9 +186,9 @@ import "../styles/global.css";
 
 <!-- Boutons de navigation -->
 <div class="navigation-buttons">
-  <button onclick="switchCharacter(0)">Etudiant</button>
-  <button onclick="switchCharacter(1)">Traqueur</button>
-  <button onclick="switchCharacter(2)">IA Robotique</button>
+  <button onclick="switchCharacter(0)">Student</button>
+  <button onclick="switchCharacter(1)">Hunter</button>
+  <button onclick="switchCharacter(2)">Robotic AI</button>
 </div>
 
 <!-- fond de la page -->
@@ -370,6 +370,7 @@ import "../styles/global.css";
 
     width: calc(100% - 700px);
     color: white;
+    margin-top: 100px;
 
     h1 {
       font-size: 50px;
@@ -398,7 +399,7 @@ import "../styles/global.css";
       text-transform: none;
 
       /* padding-right: 50px; */
-      width: 60%;
+      width: 48%;
 
       margin-top: 20px;
       margin-bottom: 30px;

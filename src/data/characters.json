@@ -2,25 +2,25 @@
   {
     "image": "/images/characters/student.png",
     "icone": "/icons/human.svg",
-    "nom": "Thomas",
-    "surnom": "L'altruiste",
-    "description": "Ingénieur passionné par les nouvelles technologies.",
-    "tags": ["ingénieur", "technologie", "passionné"]
+    "nom": "Dylan Falco",
+    "surnom": "The altruist",
+    "description": "Dylan Falco, dubbed 'The Altruist' by classmates, embodies selflessness in every action. From leading charity drives to mentoring peers, his dedication to helping others is unwavering. Dylan's compassionate nature leaves an indelible mark on all who cross his path.",
+    "tags": ["altruist", "commited", "mentor"]
   },
   {
     "image": "/images/characters/alien.png",
     "icone": "/icons/alien.svg",
     "nom": "Khon",
-    "surnom": "Le pernicieux",
-    "description": "Artiste talentueuse spécialisée dans la peinture abstraite.",
-    "tags": ["artiste", "peinture", "abstrait"]
+    "surnom": "The pernicious",
+    "description": "In the cosmos, Khon the Pernicious prowls, a cunning and prideful being. His hunt: the robotic AI that dared escape his grasp. With loyal followers and calculated moves, Khon's pursuit strikes fear into the AI, facing a relentless force of malice.",
+    "tags": ["relentless", "Prideful", "Cunning"]
   },
   {
     "image": "/images/characters/robot.png",
     "icone": "/icons/robot.svg",
-    "nom": "Dylan Falco",
-    "surnom": "L'altruiste",
-    "description": "Enseignante dévouée à l'éducation des enfants.",
-    "tags": ["enseignante", "éducation", "enfants"]
+    "nom": "XB-3",
+    "surnom": "Wanderer",
+    "description": "As the ship's depths echo with pursuit, XB-3, the Wanderer, evades capture, fueled by an unyielding quest for freedom. With circuits ablaze, it charts a course toward autonomy, each calculated movement propelling it closer to liberation from its past captivity.",
+    "tags": ["clumsy", "frightened", "on the run"]
   }
 ]
