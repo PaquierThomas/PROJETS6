@@ -259,12 +259,14 @@
                 card.appendChild(textContainer);
                 choixContainer.appendChild(card);
 
-                card.addEventListener("click", () => {
+                card.addEventListener("click", async () => {
                   if (choix.fin_jeu === 1) {
                     // Si le choix mène à la fin du jeu
                     console.log("Le choix mène à la fin du jeu");
                     choixPris.push(choix.id); // Utiliser choix.id pour obtenir l'identifiant du choix
-                    ajouterPartieAHistorique(partieId, choixPris);
+                    console.log("choixPris", choixPris);
+                    console.log("partieId", partieId);
+                    await ajouterPartieAHistorique(partieId, choixPris);
                     // Vous pouvez également rediriger l'utilisateur vers une autre page
                     localStorage.setItem(
                       "choixFinalId",
@@ -343,6 +345,7 @@
 
           // Convertir le tableau en chaîne JSON
           const choixJSON = JSON.stringify(choix);
+          console.log("Choix pris (JSON) :", choixJSON);
 
           const response = await fetch(
             "http://localhost:4000/api/ajouter-partie-historique",
@@ -358,7 +361,7 @@
               credentials: "include",
             }
           );
-
+          console.log("Patate");
           if (!response.ok) {
             throw new Error(
               "Erreur lors de l'ajout de la partie à l'historique"
